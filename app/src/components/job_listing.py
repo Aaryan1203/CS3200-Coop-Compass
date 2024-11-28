@@ -1,8 +1,9 @@
 import streamlit as st
 from utils.job_listing_modals import delete_job_listing_modal
 from utils.job_listing_modals import edit_job_listing_modal
+from utils.frontend_routes import toggle_favorite_job_listing
 
-def job_listing_component(job, num_reviews, my_job_postings=False):
+def job_listing_component(job, num_reviews, student_id, my_job_postings=False, is_favorite=False):
     delete_modal_key = f"delete_modal_{job['Job Listing ID']}"
     edit_modal_key = f"edit_modal_{job['Job Listing ID']}"
 
@@ -12,7 +13,7 @@ def job_listing_component(job, num_reviews, my_job_postings=False):
         st.session_state[edit_modal_key] = False
 
     with st.expander(f"{job['Company']}: {job['Job Title']}"):
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns([2, 2, 1])
         with col1:
             st.write("**Start Date**")
             st.write(job.get('Start Date', 'N/A'))
@@ -37,6 +38,14 @@ def job_listing_component(job, num_reviews, my_job_postings=False):
                     st.session_state[edit_modal_key] = True
                 if st.button("Delete Job Listing", key=f"delete_job_{job['Job Listing ID']}"):
                     st.session_state[delete_modal_key] = True
+        with col3:
+            if st.button("⭐" if is_favorite else "☆",
+                         key=f"favorite_button_{job['Job Listing ID']}"):
+                payload = {
+                    'jobListingId': job['Job Listing ID'],
+                    'studentId': student_id
+                }
+                toggle_favorite_job_listing(payload)
         st.write("**Description**")
         st.write(job.get('Description', 'N/A'))
 

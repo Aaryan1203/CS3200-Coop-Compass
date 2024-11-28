@@ -75,11 +75,11 @@ if st.button('View all Job Postings',
              use_container_width=True):
   st.session_state['company_id'] = False
   st.session_state['my_job_postings'] = False
-  st.switch_page('pages/Job_Listings.py')
+  st.switch_page('pages/Job_Listings_Page.py')
 
 if st.button('View my Job Postings', 
              type='primary',
              use_container_width=True):
   st.session_state['company_id'] = False
   st.session_state['my_job_postings'] = True
-  st.switch_page('pages/Job_Listings.py')
+  st.switch_page('pages/Job_Listings_Page.py')

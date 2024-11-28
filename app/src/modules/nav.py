@@ -2,35 +2,35 @@ import streamlit as st
 
 #### ------------------------ General ------------------------
 def HomeNav():
-    st.sidebar.page_link("Home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("Home_Page.py", label="Home", icon="🏠")
 
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/About_Page.py", label="About", icon="🧠")
 
 
 #### ------------------------ Role of Student ------------------------
 def StudentHomeNav():
     st.sidebar.page_link(
-        "pages/Student_Home.py", label="Student Home", icon="👤"
+        "pages/Student_Home_Page.py", label="Student Home", icon="👤"
     )
 
 #### ------------------------ Role of Recruiter ------------------------
 def RecruiterHomeNav():
     st.sidebar.page_link(
-        "pages/Recruiter_Home.py", label="Recruiter Home", icon="👤"
+        "pages/Recruiter_Home_Page.py", label="Recruiter Home", icon="👤"
     )
 
 #### ------------------------ Role of Advisor ------------------------
 def AdvisorHomeNav():
     st.sidebar.page_link(
-        "pages/Advisor_Home.py", label="Advisor Home", icon="👤"
+        "pages/Advisor_Home_Page.py", label="Advisor Home", icon="👤"
     )
 
 #### ------------------------ Role of Admin ------------------------
 def AdminHomeNav():
     st.sidebar.page_link(
-        "pages/Admin_Home.py", label="Admin Home", icon="👤"
+        "pages/Admin_Home_Page.py", label="Admin Home", icon="👤"
     )
 
 # --------------------------------Links Function -----------------------------------------------
@@ -97,7 +97,7 @@ def SideBarLinks():
     # If there is no logged-in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
-        st.switch_page("Home.py")
+        st.switch_page("Home_Page.py")
 
     if not st.session_state["authenticated"]:
         HomeNav()
@@ -127,4 +127,4 @@ def SideBarLinks():
         if st.sidebar.button("Logout"):
             del st.session_state["role"]
             del st.session_state["authenticated"]
-            st.switch_page("Home.py")
+            st.switch_page("Home_Page.py")

@@ -157,8 +157,57 @@ def delete_job_listing(job_listing_id):
     return response
 
 #------------------------------------------------------------
-# Companies Section
+# Get all favorite job listings
 #------------------------------------------------------------
+@job_listings.route('/job_listings/favorite/<student_id>', methods=['GET'])
+def get_favorite_job_listings(student_id):
+    query = f'''
+        SELECT jobListingId as 'Job Listing ID', studentId as 'Student ID'
+        FROM favoriteJobListings
+        WHERE studentId = '{str(student_id)}'
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Toggle favorite job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listing/favorite', methods=['POST'])
+def toggle_favorite_job_listing():
+    data = request.json
+    job_listing_id = data['jobListingId']
+    student_id = data['studentId']
+    
+    query = f'''
+        SELECT *
+        FROM favoriteJobListings
+        WHERE jobListingId = '{str(job_listing_id)}' AND studentId = '{str(student_id)}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchone()
+    
+    if theData:
+        query = f'''
+            DELETE FROM favoriteJobListings
+            WHERE jobListingId = '{str(job_listing_id)}' AND studentId = '{str(student_id)}'
+        '''
+    else:
+        query = f'''
+            INSERT INTO favoriteJobListings (jobListingId, studentId)
+            VALUES ('{str(job_listing_id)}', '{str(student_id)}')
+        '''
+    
+    cursor.execute(query)
+    db.get_db().commit()
+    response = make_response(jsonify({"message": "Favorite job listing updated"}))
+    response.status_code = 200
+    return response
 
 #------------------------------------------------------------
 # Get all companies

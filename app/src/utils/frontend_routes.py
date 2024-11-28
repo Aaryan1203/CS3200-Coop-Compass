@@ -70,6 +70,12 @@ def get_job_listings_by_recruiter(recruiter_id):
 def get_job_listings_by_company(company_id):
     return fetch_data(f'/j/job_listings/company/{company_id}')
 
+def get_favorite_job_listings(student_id):
+    return fetch_data(f'/j/job_listings/favorite/{student_id}')
+
+def toggle_favorite_job_listing(data):
+    return create_data('/j/job_listing/favorite', data)
+
 def create_job_listing(data):
     return create_data('/j/job_listing', data)
 

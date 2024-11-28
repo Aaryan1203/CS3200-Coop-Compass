@@ -134,7 +134,7 @@ with cols[0]:
         unsafe_allow_html=True,
     )
     if st.button("View All Companies", use_container_width=True):
-        st.switch_page("pages/Companies.py")
+        st.switch_page("pages/Companies_Page.py")
 
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
@@ -156,7 +156,8 @@ with cols[1]:
     )
     if st.button("View All Job Postings", use_container_width=True):
         st.session_state['recruiter_id'] = False
-        st.switch_page("pages/Job_Listings.py")
+        st.session_state['company_id'] = False
+        st.switch_page("pages/Job_Listings_Page.py")
 
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
@@ -180,8 +181,7 @@ with cols[2]:
     # Add "View My Reviews" button below
     if st.button("View My Reviews", use_container_width=True, key="my_reviews_button"):
         st.session_state['job_listing_id'] = False
-        st.session_state['student_id'] = '100'
-        st.switch_page("pages/Reviews.py")
+        st.switch_page("pages/Reviews_Page.py")
 
     # Preview section for reviews
     st.markdown(

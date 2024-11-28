@@ -144,7 +144,7 @@ with cols[0]:
         st.session_state['role'] = 'student'
         st.session_state['first_name'] = 'Aaryan'
         st.session_state['student_id'] = '100'
-        st.switch_page("pages/Student_Home.py")
+        st.switch_page("pages/Student_Home_Page.py")
 
 with cols[1]:
     st.markdown(
@@ -161,7 +161,7 @@ with cols[1]:
         st.session_state['role'] = 'recruiter'
         st.session_state['first_name'] = 'Quandale'
         st.session_state['recruiter_id'] = '0'
-        st.switch_page("pages/Recruiter_Home.py")
+        st.switch_page("pages/Recruiter_Home_Page.py")
 
 cols = st.columns(2, gap="large")
 
@@ -179,7 +179,7 @@ with cols[0]:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'advisor'
         st.session_state['first_name'] = 'Rachel'
-        st.switch_page("pages/Advisor_Home.py")
+        st.switch_page("pages/Advisor_Home_Page.py")
 
 with cols[1]:
     st.markdown(
@@ -195,4 +195,4 @@ with cols[1]:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'admin'
         st.session_state['first_name'] = 'Sam'
-        st.switch_page("pages/Admin_Home.py")
+        st.switch_page("pages/Admin_Home_Page.py")

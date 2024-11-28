@@ -411,10 +411,10 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 --        ('R2', 'Rev2'),
 --        ('R3', 'Rev3');
 
--- INSERT IGNORE INTO `favoriteJobListings` (`studentId`, `jobListingId`)
--- VALUES ('S1', 'J1'),
---        ('S2', 'J2'),
---        ('S3', 'J3');
+INSERT INTO `favoriteJobListings` (`studentId`, `jobListingId`)
+VALUES ('100', 'job_1'),
+       ('100', 'job_2'),
+       ('100', 'job_3');
 
 -- INSERT IGNORE INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
 -- VALUES ('Rev1', 'Rcrt1', 'Inappropriate language', '2024-05-15'),
