@@ -28,7 +28,7 @@ def review_component(review, my_reviews=False):
             with col2:
                 if st.button("Edit review", key=f"edit_review_{review['Review ID']}"):
                     st.session_state[edit_modal_key] = True
-                if st.button("Delete review", key=f"delete_review_{review['Review ID']}"):
+                if st.button("Delete review", key=f"delete_review_{review['Review ID']}") if not review['Deleted'] else st.button("Restore review", key=f"restore_review_{review['Review ID']}"):
                     st.session_state[delete_modal_key] = True
 
     # Delete modal

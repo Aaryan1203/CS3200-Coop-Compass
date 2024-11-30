@@ -27,6 +27,25 @@ def get_all_job_listings():
     return response
 
 #------------------------------------------------------------
+# Get all deleted job listings
+#------------------------------------------------------------
+@job_listings.route('/job_listings/deleted', methods=['GET'])
+def get_deleted_job_listings():
+    query = '''
+        SELECT J.jobListingId as 'Job Listing ID', J.jobTitle as 'Job Title', J.description as Description, J.startDate as 'Start Date', J.endDate as 'End Date', J.hourlyWage as 'Hourly Wage', J.skills as 'Skills', J.location as 'Location', C.name as Company, C.companyId as 'Company ID'
+        FROM jobListing J
+        JOIN company C ON J.companyId = C.companyId
+        WHERE deleted = true
+    '''
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
 # Get a single job listing
 #------------------------------------------------------------
 @job_listings.route('/job_listing/<job_listing_id>', methods=['GET'])
@@ -139,17 +158,33 @@ def update_job_listing():
     return response
 
 #------------------------------------------------------------
-# Delete a job listing
+# toggle delete a job listing
 #------------------------------------------------------------
 @job_listings.route('/job_listing/<job_listing_id>', methods=['PUT'])
-def delete_job_listing(job_listing_id):
+def toggle_delete_job_listing(job_listing_id):
     query = f'''
-        UPDATE jobListing
-        SET deleted = true
+        SELECT deleted
+        FROM jobListing
         WHERE jobListingId = '{str(job_listing_id)}'
     '''
     
     cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchone()
+    
+    if theData['deleted']:
+        query = f'''
+            UPDATE jobListing
+            SET deleted = false
+            WHERE jobListingId = '{str(job_listing_id)}'
+        '''
+    else:
+        query = f'''
+            UPDATE jobListing
+            SET deleted = true
+            WHERE jobListingId = '{str(job_listing_id)}'
+        '''
+    
     cursor.execute(query)
     db.get_db().commit()
     response = make_response(jsonify({"message": "Job Listing deleted"}))

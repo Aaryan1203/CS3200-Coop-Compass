@@ -13,9 +13,11 @@ reviews = Blueprint('reviews', __name__)
 @reviews.route('/reviews', methods=['GET'])
 def get_all_reviews():
     query = '''
-        SELECT jobListingId as 'Job Listing ID', anonymous as Anonymous, description as Descriotion, jobSatisfaction as 'Job Satisfaction', hourlyWage as 'Hourly Wage'
-        FROM review
-        WHERE deleted = false
+        SELECT R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Descriotion, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', R.deleted as Deleted, J.jobTitle as 'Job Title', C.name as Company
+        FROM review R
+        JOIN jobListing J ON R.jobListingId = J.jobListingId
+        JOIN company C ON J.companyId = C.companyId
+        WHERE R.deleted = false
     '''
     
     cursor = db.get_db().cursor()
@@ -31,7 +33,7 @@ def get_all_reviews():
 @reviews.route('/reviews/<job_listing_id>', methods=['GET'])
 def get_reviews_by_job_listing(job_listing_id):
     query = f'''
-        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted
         FROM review R
         JOIN student S ON R.studentId = S.studentId
         JOIN jobListing J ON R.jobListingId = J.jobListingId
@@ -53,7 +55,7 @@ def get_reviews_by_job_listing(job_listing_id):
 @reviews.route('/reviews/student/<student_id>', methods=['GET'])
 def get_reviews_by_student(student_id):
     query = f'''
-        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted
         FROM review R
         JOIN student S ON R.studentId = S.studentId
         JOIN jobListing J ON R.jobListingId = J.jobListingId
@@ -61,6 +63,27 @@ def get_reviews_by_student(student_id):
         WHERE R.studentId = '{str(student_id)}' AND R.deleted = false
     '''
     
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Get all deleted reviews
+#------------------------------------------------------------
+@reviews.route('/reviews/deleted', methods=['GET'])
+def get_deleted_reviews():
+    query = '''
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted
+        FROM review R
+        JOIN student S ON R.studentId = S.studentId
+        JOIN jobListing J ON R.jobListingId = J.jobListingId
+        JOIN company C ON J.companyId = C.companyId
+        WHERE R.deleted = true
+    '''
+
     cursor = db.get_db().cursor()
     cursor.execute(query)
     theData = cursor.fetchall()
@@ -120,13 +143,13 @@ def update_review():
     return response
 
 #------------------------------------------------------------
-# Delete a review
+# Toggle delete a review
 #------------------------------------------------------------
 @reviews.route('/review/<review_id>', methods=['PUT'])
-def delete_review(review_id):
+def toggle_delete_review(review_id):
     query = f'''
         UPDATE review
-        SET deleted = true
+        SET deleted = NOT deleted
         WHERE reviewId = '{review_id}'
     '''
     
@@ -134,6 +157,6 @@ def delete_review(review_id):
     cursor.execute(query)
     db.get_db().commit()
     
-    response = make_response(jsonify({"message": "Review deleted."}))
+    response = make_response(jsonify({"message": "Review updated."}))
     response.status_code = 200
     return response

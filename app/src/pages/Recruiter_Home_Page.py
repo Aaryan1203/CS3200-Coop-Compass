@@ -68,13 +68,16 @@ st.write('### What would you like to do today?')
 if st.button('View all Companies', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/Companies.py')
+  st.switch_page('pages/Companies_Page.py')
 
 if st.button('View all Job Postings', 
              type='primary',
              use_container_width=True):
   st.session_state['company_id'] = False
   st.session_state['my_job_postings'] = False
+  st.session_state['student_id'] = False
+  st.session_state['admin_id'] = False
+  st.session_state['show_deleted'] = False
   st.switch_page('pages/Job_Listings_Page.py')
 
 if st.button('View my Job Postings', 
@@ -82,4 +85,5 @@ if st.button('View my Job Postings',
              use_container_width=True):
   st.session_state['company_id'] = False
   st.session_state['my_job_postings'] = True
+  st.session_state['show_deleted'] = False
   st.switch_page('pages/Job_Listings_Page.py')
