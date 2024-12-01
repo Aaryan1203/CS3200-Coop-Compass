@@ -32,15 +32,29 @@ SideBarLinks()
 st.markdown(
     """
     <style>
+        /* Remove white space at the top by targeting Streamlit header */
+        [data-testid="stHeader"] {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: none !important; /* Remove unnecessary background */
+        }
+
+        /* Adjust block container for content */
+        .block-container {
+            padding-top: 2rem !important; /* Restore top padding for content */
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
         /* Set the entire page background to black */
         body {
             background-color: #000000 !important;
             color: #e0e0e0;
         }
 
-        /* Change the main container background to black */
+        /* Change the main app container background to black */
         .stApp {
-            background-color: #000000;
+            background-color: #000000 !important;
         }
         
         /* Hero Section Styling */
@@ -51,6 +65,7 @@ st.markdown(
             background-color: #1a1a1a; /* Lighter black/gray */
             border-radius: 15px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
         }
         .hero h1 {
             color: #bb86fc;
@@ -61,8 +76,8 @@ st.markdown(
             color: #e0e0e0;
             font-size: 1.2rem;
         }
-        
-        /* Target Markdown Text (Select a User Persona) */
+
+        /* Markdown Styling */
         .stMarkdown h3 {
             color: #bb86fc !important; /* Light purple */
             font-size: 1.5rem !important;
@@ -113,7 +128,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Add a hero section for the homepage
+# Hero Section
 st.markdown(
     """
     <div class="hero">
@@ -123,6 +138,8 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
 
 # Add user persona cards for a better visual layout
 st.write('\n\n')

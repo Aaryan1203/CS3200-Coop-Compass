@@ -16,15 +16,32 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+        /* Remove white space at the top by targeting Streamlit header */
+        [data-testid="stHeader"] {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: none !important; /* Remove unnecessary background */
+        }
+
+        /* Adjust block container for content */
+        .block-container {
+            padding-top: 2rem !important; /* Restore top padding for content */
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        /* Set the entire page background to black */
         body {
             background-color: #000000 !important;
             color: #e0e0e0 !important;
         }
 
+        /* Change the main app container background to black */
         .stApp {
             background-color: #000000 !important;
         }
 
+        /* Hero Section Styling */
         .hero {
             text-align: center;
             padding: 20px;
@@ -43,6 +60,7 @@ st.markdown(
             font-size: 1.2rem;
         }
 
+        /* Card Styling */
         .card {
             background-color: #1a1a1a;
             border-radius: 10px;
@@ -66,6 +84,7 @@ st.markdown(
             background-color: #333333;
         }
 
+        /* Button Styling */
         div.stButton > button {
             background-color: #0047AB !important;
             color: #ffffff !important;
@@ -79,6 +98,7 @@ st.markdown(
             background-color: #003366 !important;
         }
 
+        /* Preview Box Styling */
         .preview {
             text-align: left;
             color: #e0e0e0;
