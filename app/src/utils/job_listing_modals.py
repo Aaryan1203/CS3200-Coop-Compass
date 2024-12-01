@@ -2,7 +2,7 @@ import streamlit as st
 from utils.frontend_routes import get_all_companies
 from utils.frontend_routes import create_job_listing
 from utils.frontend_routes import edit_job_listing
-from utils.frontend_routes import delete_job_listing
+from utils.frontend_routes import toggle_delete_job_listing
 import logging
 from datetime import datetime
 
@@ -86,11 +86,11 @@ def edit_job_listing_modal(job_listing, edit_modal_key):
         st.success("Job Listing updated successfully.")
         st.session_state[edit_modal_key] = False
 
-def delete_job_listing_modal(job_listing_id, delete_modal_key):
+def delete_job_listing_modal(job_listing_id, delete_modal_key, deleted):
     st.write("### Are you sure you want to delete this job listing?")
-    if st.button("Confirm Delete"):
-        delete_job_listing(job_listing_id)
-        st.success("Job Listing deleted successfully.")
+    if (st.button("Confirm Delete") if not deleted else st.button("Restore Job Listing")):
+        toggle_delete_job_listing(job_listing_id)
+        st.success("Job Listing deleted successfully.") if not deleted else st.success("Job Listing restored successfully.")
         st.session_state[delete_modal_key] = False
     if st.button("Cancel"):
         st.session_state[delete_modal_key] = False

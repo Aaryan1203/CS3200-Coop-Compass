@@ -16,4 +16,5 @@ def company_component(company, num_job_listings):
                     key=f"listings_button_{company['Company ID']}",
                     type='secondary'):
                 st.session_state['company_id'] = company['Company ID']
-                st.switch_page('pages/Job_Listings.py')
+                st.session_state['show_deleted'] = False
+                st.switch_page('pages/Job_Listings_Page.py')

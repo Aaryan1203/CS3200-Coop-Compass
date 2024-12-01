@@ -70,13 +70,22 @@ def get_job_listings_by_recruiter(recruiter_id):
 def get_job_listings_by_company(company_id):
     return fetch_data(f'/j/job_listings/company/{company_id}')
 
+def get_favorite_job_listings(student_id):
+    return fetch_data(f'/j/job_listings/favorite/{student_id}')
+
+def get_deleted_job_listings():
+    return fetch_data('/j/job_listings/deleted')
+
+def toggle_favorite_job_listing(data):
+    return create_data('/j/job_listing/favorite', data)
+
 def create_job_listing(data):
     return create_data('/j/job_listing', data)
 
 def edit_job_listing(data):
     return edit_data('/j/job_listing', data)
 
-def delete_job_listing(job_listing_id):
+def toggle_delete_job_listing(job_listing_id):
     return delete_data(f'/j/job_listing/{job_listing_id}')
 
 #----------------- Reviews -----------------#
@@ -90,13 +99,16 @@ def get_reviews_for_job_listing(job_listing_id):
 def get_reviews_by_student(student_id):
     return fetch_data(f'/r/reviews/student/{student_id}')
 
+def get_deleted_reviews():
+    return fetch_data('/r/reviews/deleted')
+
 def create_review(data):
     return create_data('/r/review', data)
 
 def edit_review(data):
     return edit_data('/r/review', data)
 
-def delete_review(review_id):
+def toggle_delete_review(review_id):
     return delete_data(f'/r/review/{review_id}')
 
 #----------------- Advisors -----------------#

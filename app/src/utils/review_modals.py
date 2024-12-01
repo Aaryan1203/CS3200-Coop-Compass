@@ -3,7 +3,7 @@ import logging
 logger = logging.getLogger(__name__)
 from utils.frontend_routes import create_review
 from utils.frontend_routes import edit_review
-from utils.frontend_routes import delete_review
+from utils.frontend_routes import toggle_delete_review
 
 def create_review_modal(job_listing_id, student_id):
     st.write("### Write a Review")
@@ -53,9 +53,9 @@ def edit_review_modal(review, edit_modal_key):
     
 def delete_review_modal(review, delete_modal_key):
     st.write("### Are you sure you want to delete this review?")
-    if st.button("Confirm Delete", key=f"confirm_delete_{review['Review ID']}"):
-        delete_review(review['Review ID'])
-        st.success(f"Review for {review['Job Title']} deleted successfully!")
+    if st.button("Confirm", key=f"confirm_delete_{review['Review ID']}"):
+        toggle_delete_review(review['Review ID'])
+        st.success(f"Review for {review['Job Title']} updated successfully!")
         st.session_state[delete_modal_key] = False
     if st.button("Cancel", key=f"cancel_delete_{review['Review ID']}"):
         st.session_state[delete_modal_key] = False
