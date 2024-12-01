@@ -11,7 +11,7 @@ from utils.frontend_routes import get_reviews_by_student
 # Set page layout
 st.set_page_config(layout='wide')
 
-student_id = st.session_state.get('student_id', None)
+student_id = st.session_state.get('studentId', None)
 
 try:
     reviews = get_reviews_by_student(student_id)
@@ -20,13 +20,14 @@ except:
 
 SideBarLinks()
 
-# Page Title
-st.title(f"{reviews['Student Name']}'s Reviews:")
-st.write('')
-
 if reviews:
+    student_name = reviews[0]['Student Name']  # Get the student's name from the first review
+    st.title(f"{student_name}'s Reviews:")
+    st.write('')
+    
     for review in reviews:
         review_component(review, my_reviews=False)
 else:
     st.write("No reviews available.")
+
 
