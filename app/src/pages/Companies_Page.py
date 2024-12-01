@@ -93,18 +93,24 @@ st.markdown(
             background-color: #333333 !important; /* Change background on hover */
         }
 
-        /* Make the company name blue on hover */
-        [data-testid="stExpander"]:hover div,
-        [data-testid="stExpander"]:hover span,
-        [data-testid="stExpander"]:hover * {
-            color: #0047AB !important; /* Change company name to blue */
+        /* Add hover effect only to the company name in collapsed view */
+        [data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+            color: #e0e0e0 !important; /* Default text color */
+        }
+
+        [data-testid="stExpander"]:hover > div[aria-expanded="false"] > div:first-child span:first-child {
+            color: #0047AB !important; /* Change company name to blue on hover */
+        }
+
+        /* Reset other elements inside the card to default text color */
+        [data-testid="stExpander"] div[aria-expanded="true"] span,
+        [data-testid="stExpander"] div[aria-expanded="true"] * {
+            color: #e0e0e0 !important; /* Ensure all text remains white when expanded */
         }
 
         /* Smooth transition for hover effect */
-        [data-testid="stExpander"] div,
-        [data-testid="stExpander"] span,
-        [data-testid="stExpander"] * {
-            transition: color 0.3s ease-in-out !important; /* Smooth transition */
+        [data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+            transition: color 0.3s ease-in-out !important; /* Smooth transition for company name */
         }
 
         /* Links and buttons */
@@ -166,8 +172,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-
 
 
 
