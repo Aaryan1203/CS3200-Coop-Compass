@@ -196,6 +196,7 @@ with cols[0]:
         st.session_state['authenticated'] = True
         st.session_state['role'] = 'advisor'
         st.session_state['first_name'] = 'Rachel'
+        st.session_state['advisor_id'] = '1'
         st.switch_page("pages/Advisor_Home_Page.py")
 
 with cols[1]:
