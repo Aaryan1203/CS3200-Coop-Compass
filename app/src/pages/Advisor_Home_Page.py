@@ -67,7 +67,7 @@ st.write('### What would you like to do today?')
 if st.button('View my Students Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/My_Students.py')
 
 if st.button('View my Students Analytics', 
              type='primary',
