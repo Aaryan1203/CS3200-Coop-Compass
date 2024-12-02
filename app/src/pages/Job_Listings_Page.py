@@ -227,7 +227,7 @@ if isinstance(job_listings, list):
                         if review["Job Listing ID"] == job["Job Listing ID"]
                     ]
                 )
-                job_listing_component(job, num_reviews, student_id, is_favorite=True)
+                job_listing_component(job, num_reviews, student_id, advisor_id, is_favorite=True)
 
         # Other Job Listings Header
         st.markdown(
@@ -243,7 +243,7 @@ if isinstance(job_listings, list):
                     if review["Job Listing ID"] == job["Job Listing ID"]
                 ]
             )
-            job_listing_component(job, num_reviews, student_id)
+            job_listing_component(job, num_reviews, student_id, advisor_id)
     if advisor_id:
         for job in job_listings:
             num_reviews = len(
