@@ -4,6 +4,7 @@ from modules.nav import SideBarLinks
 from utils.frontend_routes import get_students_for_advisor
 from utils.frontend_routes import get_reviews_by_student
 from components.student import student_component
+from utils.style_utils import load_css
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -13,6 +14,10 @@ logger = logging.getLogger(__name__)
 
 # Set page layout
 st.set_page_config(layout='wide')
+
+
+load_css("./styles/my_students_styles.css")
+
 
 # Sidebar navigation
 SideBarLinks()
