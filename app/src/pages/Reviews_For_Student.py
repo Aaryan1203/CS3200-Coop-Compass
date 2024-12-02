@@ -9,9 +9,6 @@ from utils.frontend_routes import get_reviews_for_job_listing
 from utils.frontend_routes import get_reviews_by_student
 from utils.style_utils import load_css
 
-# Set page layout
-st.set_page_config(layout='wide')
-
 student_id = st.session_state.get('studentId', None)
 recruiter_id = st.session_state.get('recruiterId', None)
 

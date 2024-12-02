@@ -73,7 +73,6 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
                 except Exception as e:
                     st.error(f"Error fetching students: {e}")
 
-            
         st.write("**Description**")
         st.write(job.get('Description', 'N/A'))
 
