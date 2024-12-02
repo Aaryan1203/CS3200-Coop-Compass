@@ -4,7 +4,7 @@ from utils.job_listing_modals import edit_job_listing_modal
 from utils.frontend_routes import toggle_favorite_job_listing
 from utils.frontend_routes import get_students_for_advisor
 
-def job_listing_component(job, num_reviews, student_id, advisor_id, isAdvisor=False, my_job_postings=False, is_favorite=False, deleted=False):
+def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=False, is_favorite=False, deleted=False):
     delete_modal_key = f"delete_modal_{job['Job Listing ID']}"
     edit_modal_key = f"edit_modal_{job['Job Listing ID']}"
 
@@ -50,7 +50,7 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, isAdvisor=Fa
                     toggle_favorite_job_listing(payload)
         
         with col4:
-            if isAdvisor and advisor_id:
+            if advisor_id:
                 st.write("**Send to Student**")
                 try:
                     # Fetch students associated with the advisor
