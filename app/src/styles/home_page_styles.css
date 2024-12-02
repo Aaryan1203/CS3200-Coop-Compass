@@ -1,0 +1,93 @@
+/* styles.css */
+
+/* Remove white space at the top by targeting Streamlit header */
+[data-testid="stHeader"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important; /* Remove unnecessary background */
+}
+
+/* Adjust block container for content */
+.block-container {
+    padding-top: 2rem !important; /* Restore top padding for content */
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+/* Set the entire page background to black */
+body {
+    background-color: #000000 !important;
+    color: #e0e0e0;
+}
+
+/* Change the main app container background to black */
+.stApp {
+    background-color: #000000 !important;
+}
+
+/* Hero Section Styling */
+.hero {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #1a1a1a; /* Lighter black/gray */
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+}
+.hero h1 {
+    color: #bb86fc;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.hero p {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+}
+
+/* Markdown Styling */
+.stMarkdown h3 {
+    color: #bb86fc !important; /* Light purple */
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    text-align: center;
+}
+
+/* Card Styling for User Personas */
+.card {
+    background-color: #1a1a1a; /* Lighter black/gray */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+.card h3 {
+    color: #bb86fc;
+    margin-bottom: 10px;
+}
+.card p {
+    color: #e0e0e0;
+}
+
+/* Footer Styling */
+.footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 50px;
+}
+
+/* Button Styling */
+button {
+    background-color: #bb86fc;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #121212;
+    font-size: 1rem;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #3700b3;
+}

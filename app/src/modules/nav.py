@@ -1,4 +1,6 @@
 import streamlit as st
+from utils.style_utils import load_css
+
 
 #### ------------------------ General ------------------------
 def HomeNav():
@@ -41,57 +43,9 @@ def SideBarLinks():
     """
 
     # Add CSS for dark sidebar theme with forced white text for all elements
-    st.markdown(
-        """
-        <style>
-            /* Sidebar container styling */
-            section[data-testid="stSidebar"] {
-                background-color: #1a1a1a !important; /* Dark background */
-            }
 
-            /* Force all sidebar text to be white */
-            section[data-testid="stSidebar"] div {
-                color: #ffffff !important; /* Ensure all text inside sidebar is white */
-            }
+    load_css("./styles/nav_styles.css")
 
-            /* Force sidebar links to be white */
-            section[data-testid="stSidebar"] div[class*="stLink"] {
-                color: #ffffff !important; /* Force white color for links */
-                font-weight: bold !important; /* Make text bold for visibility */
-            }
-
-            /* Adjust icon color */
-            section[data-testid="stSidebar"] svg {
-                color: #ffffff !important; /* Ensure icons are white */
-            }
-
-            /* Hover effect for links */
-            section[data-testid="stSidebar"] div[class*="stLink"]:hover {
-                color: #bb86fc !important; /* Purple text on hover */
-                background-color: #333333 !important; /* Light gray background on hover */
-            }
-
-            /* Specific styling for Logout button */
-            section[data-testid="stSidebar"] div.stButton > button {
-                background-color: #0047AB !important; /* Dark blue background */
-                color: #ffffff !important; /* White text */
-                border-radius: 5px !important;
-                padding: 10px 15px !important;
-                font-size: 1rem !important;
-                border: none !important;
-            }
-
-            /* Hover effect for Logout button */
-            section[data-testid="stSidebar"] div.stButton > button:hover {
-                background-color: #003366 !important; /* Darker blue on hover */
-                color: #ffffff !important; /* White text on hover */
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # Add a logo to the sidebar always
     st.sidebar.image("assets/Coop Compass.png", width=300)
 
     # If there is no logged-in user, redirect to the Home (Landing) page

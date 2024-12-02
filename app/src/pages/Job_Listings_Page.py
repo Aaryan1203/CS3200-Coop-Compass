@@ -15,6 +15,7 @@ from utils.frontend_routes import (
     get_deleted_job_listings,
 )
 from utils.job_listing_modals import create_job_listing_modal
+from utils.style_utils import load_css
 
 # Initialize session state for modals
 if "create_modal" not in st.session_state:
@@ -58,140 +59,7 @@ try:
 except:
     st.write("**Important**: Could not connect to API.")
 
-st.markdown(
-    """
-    <style>
-        /* Remove the persistent white header */
-        [data-testid="stHeader"] {
-            display: none !important;
-        }
-
-        /* General page and text styling */
-        body {
-            background-color: #000000 !important;
-            color: #ffffff !important; /* Ensure all text is pure white */
-        }
-        .stApp {
-            background-color: #000000 !important;
-            margin-top: -50px !important; /* Remove unnecessary top margin */
-        }
-
-        /* Sidebar styling */
-        .css-1d391kg {
-            background-color: #1a1a1a !important;
-        }
-
-        /* Main header styling */
-        h1.main-header {
-            text-align: center;
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #ffffff !important; /* Pure white text */
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        h1.main-header::after {
-            content: "";
-            display: block;
-            width: 90%;
-            height: 2px;
-            background-color: #ffffff !important; /* White underline */
-            margin: 10px auto;
-        }
-
-        /* Sub-header styling */
-        h2.sub-header {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ffffff !important; /* Pure white text */
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-        h2.sub-header::after {
-            content: "";
-            display: block;
-            width: 60%;
-            height: 1.5px;
-            background-color: #ffffff !important; /* White underline */
-            margin: 5px auto;
-        }
-
-        /* Search bar styling */
-        .css-1cpxqw2, .css-1n543e5, .css-2hb19z {
-            color: #000000 !important; /* Black text inside input fields */
-            background-color: #ffffff !important; /* White background */
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-        }
-
-        /* Placeholder text inside the search bar */
-        ::placeholder {
-            color: #666666 !important; /* Grey placeholder */
-            opacity: 1;
-        }
-
-        /* Label styling (e.g., "Search for Jobs?") */
-        label {
-            color: #ffffff !important; /* Pure white text for labels */
-        }
-
-        /* Job listing cards */
-        [data-testid="stExpander"] {
-            border: 1px solid #cccccc !important; /* Light grey border */
-            border-radius: 10px !important;
-            background-color: #1a1a1a !important; /* Dark grey background */
-            margin-bottom: 10px !important;
-        }
-
-        /* Alternating background for cards */
-        [data-testid="stExpander"]:nth-child(odd) {
-            background-color: #252525 !important; /* Slightly lighter grey */
-        }
-
-        [data-testid="stExpander"]:nth-child(even) {
-            background-color: #1a1a1a !important; /* Default dark grey */
-        }
-
-        /* Hover effect for cards */
-        [data-testid="stExpander"]:hover {
-            background-color: #333333 !important; /* Darker grey on hover */
-        }
-
-        /* Ensure card text remains white */
-        [data-testid="stExpander"] div, 
-        [data-testid="stExpander"] span {
-            color: #ffffff !important; /* Ensure card text is pure white */
-        }
-
-        /* Button styling */
-        div.stButton > button {
-            background-color: #0047AB !important;
-            color: #ffffff !important;
-            border-radius: 5px !important;
-            padding: 10px 20px !important;
-            border: none;
-            font-size: 1rem;
-        }
-
-        div.stButton > button:hover {
-            background-color: #003366 !important;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            h1.main-header {
-                font-size: 2.5rem !important; /* Adjust main header size */
-            }
-            h2.sub-header {
-                font-size: 1.8rem !important; /* Adjust sub-header size */
-            }
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
+load_css("./styles/job_listings_page_styles.css")
 
 SideBarLinks()
 
