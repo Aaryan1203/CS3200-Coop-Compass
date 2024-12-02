@@ -77,4 +77,4 @@ if st.button('View my Students Analytics',
 if st.button('View my Sent Job Listings', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/Job_Listings_Page.py')
