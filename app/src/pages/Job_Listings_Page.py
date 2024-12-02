@@ -63,66 +63,53 @@ load_css("./styles/job_listings_page_styles.css")
 
 SideBarLinks()
 
-# Main Header
-st.markdown('<h1 class="main-header">All Job Postings</h1>', unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+# Display
+with col1:
+    if my_job_postings:
+        st.write("## My Job Postings")
+    elif company_id:
+        st.write(f"## Job Postings for {job_listings[0]['Company']}")
+    elif deleted:
+        st.write("## Deleted Job Postings")
+    elif admin_id:
+        st.write(f"## All Job Postings")
+    else:
+        st.write("## All Job Postings")
+with col2:
+    if recruiter_id:
+        if st.button("Create a new job listing"):
+            st.session_state["create_modal"] = True
+# Modal for writing a review
+if st.session_state["create_modal"]:
+    create_job_listing_modal(recruiter_id)
+text_input = search_bar("Jobs")
+# Extract just the 'Job Listing ID' values from favorite_job_listings
+favorite_job_ids = [fav['Job Listing ID'] for fav in favorite_job_listings]
 
 if isinstance(job_listings, list):
+    # Filter job listings based on search input
+    filtered_job_listings = filter_job_listings(job_listings, text_input)
+    logger.info(f"Student IDDD: {student_id}")
     if student_id:
-        favorite_jobs = [
-            job
-            for job in job_listings
-            if job["Job Listing ID"]
-            in [fav["Job Listing ID"] for fav in favorite_job_listings]
-        ]
-        other_jobs = [
-            job
-            for job in job_listings
-            if job["Job Listing ID"]
-            not in [fav["Job Listing ID"] for fav in favorite_job_listings]
-        ]
-
-        # Favorite Job Listings Header
+        favorite_jobs = [job for job in filtered_job_listings if job['Job Listing ID'] in favorite_job_ids]
+        other_jobs = [job for job in filtered_job_listings if job['Job Listing ID'] not in favorite_job_ids]
+        # Display favorite job listings
         if favorite_jobs:
-            st.markdown(
-                '<h2 class="sub-header">Favorite Job Postings</h2>',
-                unsafe_allow_html=True,
-            )
+            st.write("## Favorite Job Listings")
             for job in favorite_jobs:
-                num_reviews = len(
-                    [
-                        review
-                        for review in reviews
-                        if review["Job Listing ID"] == job["Job Listing ID"]
-                    ]
-                )
-                job_listing_component(job, num_reviews, student_id, advisor_id, is_favorite=True)
-
-        # Other Job Listings Header
-        st.markdown(
-            '<h2 class="sub-header">Other Job Listings</h2>', unsafe_allow_html=True
-        )
-        text_input = search_bar("Jobs")  # Search bar below "Other Job Listings"
-        filtered_jobs = filter_job_listings(other_jobs, text_input)
-        for job in filtered_jobs:
-            num_reviews = len(
-                [
-                    review
-                    for review in reviews
-                    if review["Job Listing ID"] == job["Job Listing ID"]
-                ]
-            )
-            job_listing_component(job, num_reviews, student_id, advisor_id)
+                num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
+                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=True)
+            st.write("## Other Job Listings")
+        # Display other job listings
+        if other_jobs:
+            for job in other_jobs:
+                num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
+                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=False)
     else:
-        for job in job_listings:
-            num_reviews = len(
-                [
-                    review
-                    for review in reviews
-                    if review["Job Listing ID"] == job["Job Listing ID"]
-                ]
-            )
-            job_listing_component(job, num_reviews, student_id, advisor_id, isAdvisor=True)
+        allow_edit = my_job_postings or admin_id
+        for job in filtered_job_listings:
+            num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
+            job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=allow_edit, deleted=deleted)
 else:
     st.write("No job postings available.")
-
-
