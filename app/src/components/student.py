@@ -14,4 +14,4 @@ def student_component(student):
             st.write("**Student's Reviews**")
             if st.button("View Reviews", key=f"reviews_button_{student['StudentID']}"):
                 st.session_state['studentId'] = student['StudentID']
-                st.switch_page("pages/ReviewsForStudent.py")
+                st.switch_page("pages/Reviews_For_Student.py")
