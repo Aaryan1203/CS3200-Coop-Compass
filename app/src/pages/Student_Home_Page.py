@@ -70,9 +70,7 @@ with cols[1]:
         unsafe_allow_html=True,
     )
     if st.button("View All Job Postings", use_container_width=True):
-        st.session_state['recruiter_id'] = False
         st.session_state['company_id'] = False
-        st.session_state['student_id'] = '100'
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.switch_page("pages/Job_Listings_Page.py")

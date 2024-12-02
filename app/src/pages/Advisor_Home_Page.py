@@ -2,6 +2,7 @@ import streamlit as st
 import logging
 logger = logging.getLogger(__name__)
 from modules.nav import SideBarLinks
+from utils.style_utils import load_css
 
 # Set Streamlit page configuration for a modern, wide layout
 st.set_page_config(
@@ -10,51 +11,7 @@ st.set_page_config(
     page_icon="🧑‍🏫"
 )
 
-# Apply custom CSS for consistent dark mode theme
-st.markdown(
-    """
-    <style>
-        /* Set the entire page background to black */
-        body {
-            background-color: #000000 !important;
-            color: #e0e0e0 !important;
-        }
-
-        /* Main container background */
-        .stApp {
-            background-color: #000000 !important;
-        }
-
-        /* Title Styling */
-        h1 {
-            color: #0047AB !important; /* Darker blue for main title */
-        }
-        h3 {
-            color: #0047AB !important; /* Darker blue for section headers */
-        }
-
-        /* Button Styling */
-        div.stButton > button {
-            background-color: #bb86fc !important; /* Blue-purple background */
-            color: #000000 !important; /* Black text */
-            border-radius: 5px !important;
-            padding: 10px 20px !important;
-            font-size: 1rem !important;
-            border: none !important;
-        }
-        div.stButton > button:hover {
-            background-color: #3700b3 !important; /* Darker purple-blue on hover */
-            color: #ffffff !important; /* White text on hover */
-        }
-
-        /* General Text */
-        p, div {
-            color: #e0e0e0 !important; /* Light gray text for readability */
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+load_css("./styles/advisor_home_page_styles.css")
 
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
@@ -84,7 +41,5 @@ if st.button('View all Job Postings',
              use_container_width=True):
   st.session_state['company_id'] = False
   st.session_state['my_job_postings'] = False
-  st.session_state['student_id'] = False
-  st.session_state['admin_id'] = False
   st.session_state['show_deleted'] = False
   st.switch_page('pages/Job_Listings_Page.py')

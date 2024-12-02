@@ -31,10 +31,6 @@ if st.button('View all Job Postings',
              type='primary',
              use_container_width=True):
   st.session_state['my_job_postings'] = False
-  st.session_state['student_id'] = False
-  st.session_state['admin_id'] = '1'
-  st.session_state['company_id'] = False
-  st.session_state['recruiter_id'] = False
   st.session_state['show_deleted'] = False
   st.switch_page('pages/Job_Listings_Page.py')
 
@@ -42,10 +38,6 @@ if st.button('View all Deleted Job Postings',
              type='primary',
              use_container_width=True):
   st.session_state['my_job_postings'] = False
-  st.session_state['student_id'] = False
-  st.session_state['admin_id'] = '1'
-  st.session_state['company_id'] = False
-  st.session_state['recruiter_id'] = False
   st.session_state['show_deleted'] = True
   st.switch_page('pages/Job_Listings_Page.py')
 
@@ -59,5 +51,4 @@ if st.button('View all Deleted Reviews',
              use_container_width=True):
   st.session_state['show_deleted'] = True
   st.session_state['job_listing_id'] = False
-  st.session_state['student_id'] = False
   st.switch_page('pages/Reviews_Page.py')

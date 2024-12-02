@@ -66,6 +66,8 @@ with cols[0]:
         st.session_state['first_name'] = 'Aaryan'
         st.session_state['student_id'] = '100'
         st.session_state['advisor_id'] = False
+        st.session_state['recruiter_id'] = False
+        st.session_state['admin_id'] = False
         st.switch_page("pages/Student_Home_Page.py")
 
 with cols[1]:
@@ -83,7 +85,9 @@ with cols[1]:
         st.session_state['role'] = 'recruiter'
         st.session_state['first_name'] = 'Quandale'
         st.session_state['recruiter_id'] = '0'
+        st.session_state['student_id'] = False
         st.session_state['advisor_id'] = False
+        st.session_state['admin_id'] = False
         st.switch_page("pages/Recruiter_Home_Page.py")
 
 cols = st.columns(2, gap="large")
@@ -103,6 +107,9 @@ with cols[0]:
         st.session_state['role'] = 'advisor'
         st.session_state['first_name'] = 'Rachel'
         st.session_state['advisor_id'] = '1'
+        st.session_state['student_id'] = False
+        st.session_state['recruiter_id'] = False
+        st.session_state['admin_id'] = False
         st.switch_page("pages/Advisor_Home_Page.py")
 
 with cols[1]:
@@ -120,4 +127,8 @@ with cols[1]:
         st.session_state['role'] = 'admin'
         st.session_state['first_name'] = 'Sam'
         st.session_state['advisor_id'] = False
+        st.session_state['student_id'] = False
+        st.session_state['recruiter_id'] = False
+        st.session_state['admin_id'] = '1'
+
         st.switch_page("pages/Admin_Home_Page.py")
