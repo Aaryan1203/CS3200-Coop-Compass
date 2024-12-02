@@ -31,67 +31,66 @@ body {
 
 /* Refined Header Styling */
 h1 {
-    text-align: center !important; /* Center-align the header */
-    font-weight: 600 !important; /* Slightly lighter font weight */
-    padding: 5px 0 !important; /* Adjusted padding */
-    margin-top: -10px !important; /* Keep header in its current position */
-    margin-bottom: 50px !important; /* Add space below the header */
-    background-color: #1a1a1a !important; /* Subtle dark background */
-    border-radius: 10px !important; /* Rounded edges */
+    text-align: center !important;
+    font-weight: 600 !important;
+    padding: 5px 0 !important;
+    margin-top: -10px !important;
+    margin-bottom: 50px !important;
+    background-color: #1a1a1a !important;
+    border-radius: 10px !important;
 }
 
-/* Thinner and centered divider line */
 h1::after {
     content: "";
     display: block;
-    width: 50%; /* Make the line shorter */
-    height: 1px !important; /* Reduce thickness */
-    background-color: #ffffff !important; /* Line color changed to white */
-    margin: 10px auto 20px; /* Add extra spacing below the divider */
+    width: 50%;
+    height: 1px !important;
+    background-color: #ffffff !important;
+    margin: 10px auto 20px;
 }
 
 /* Add light grey outline for ALL container sections */
 [data-testid="stExpander"] {
-    border: 1px solid #cccccc !important; /* Light grey outline */
+    border: 1px solid #cccccc !important;
     border-radius: 10px !important;
     padding: 15px !important;
     background-color: #1a1a1a !important;
-    margin-bottom: 10px !important; /* Reduced spacing between cards */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important; /* Sharper shadow */
+    margin-bottom: 10px !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Add alternating background colors for boxes */
 [data-testid="stExpander"]:nth-child(odd) {
-    background-color: #252525 !important; /* Slightly lighter background for odd boxes */
+    background-color: #252525 !important;
 }
 
 [data-testid="stExpander"]:nth-child(even) {
-    background-color: #1a1a1a !important; /* Default for even boxes */
+    background-color: #1a1a1a !important;
 }
 
 /* Add hover effect to entire card */
 [data-testid="stExpander"]:hover {
-    background-color: #333333 !important; /* Change background on hover */
+    background-color: #333333 !important;
 }
 
 /* Add hover effect only to the company name in collapsed view */
 [data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
-    color: #e0e0e0 !important; /* Default text color */
+    color: #e0e0e0 !important;
 }
 
 [data-testid="stExpander"]:hover > div[aria-expanded="false"] > div:first-child span:first-child {
-    color: #0047AB !important; /* Change company name to blue on hover */
+    color: #0047AB !important;
 }
 
 /* Reset other elements inside the card to default text color */
 [data-testid="stExpander"] div[aria-expanded="true"] span,
 [data-testid="stExpander"] div[aria-expanded="true"] * {
-    color: #e0e0e0 !important; /* Ensure all text remains white when expanded */
+    color: #e0e0e0 !important;
 }
 
 /* Smooth transition for hover effect */
 [data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
-    transition: color 0.3s ease-in-out !important; /* Smooth transition for company name */
+    transition: color 0.3s ease-in-out !important;
 }
 
 /* Links and buttons */
@@ -103,34 +102,28 @@ div.stButton > button {
     border: none !important;
     padding: 10px 20px !important;
     border-radius: 5px !important;
-    transition: all 0.3s ease-in-out !important; /* Smooth hover transition */
+    transition: all 0.3s ease-in-out !important;
 }
 div.stButton > button:hover {
-    transform: scale(1.05) !important; /* Slightly enlarge button on hover */
-    background-color: #003366 !important; /* Darker blue hover effect */
+    transform: scale(1.05) !important;
+    background-color: #003366 !important;
 }
 
 /* Dropdowns and other input fields */
 .css-1cpxqw2, .css-1n543e5, .css-2hb19z {
-    color: #000000 !important; /* Make input text black */
-    background-color: #ffffff !important; /* Background color */
-}
-
-/* General input styling (including the search bar) */
-input {
-    color: #000000 !important; /* Make text black */
-    background-color: #ffffff !important; /* Ensure white background */
+    color: #000000 !important;
+    background-color: #ffffff !important;
 }
 
 /* Placeholder text */
 ::placeholder {
-    color: #000000 !important; /* Placeholder text color */
+    color: #000000 !important;
     opacity: 1 !important;
 }
 
 /* Smooth animations for expanding sections */
 [data-testid="stExpander"] > div {
-    transition: all 0.3s ease-in-out !important; /* Smooth expand/collapse */
+    transition: all 0.3s ease-in-out !important;
 }
 
 /* Ensure white text for Markdown-rendered content */
@@ -141,11 +134,11 @@ input {
 /* Make the page responsive */
 @media (max-width: 768px) {
     h1 {
-        font-size: 1.8rem !important; /* Smaller header font size for mobile */
+        font-size: 1.8rem !important;
     }
 
     [data-testid="stExpander"] {
-        padding: 10px !important; /* Reduce padding */
-        margin-bottom: 5px !important; /* Even less margin between boxes for mobile */
+        padding: 10px !important;
+        margin-bottom: 5px !important;
     }
 }

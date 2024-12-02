@@ -63,23 +63,22 @@ load_css("./styles/job_listings_page_styles.css")
 
 SideBarLinks()
 
-col1, col2 = st.columns(2)
 # Display
-with col1:
-    if my_job_postings:
-        st.write("## My Job Postings")
-    elif company_id:
-        st.write(f"## Job Postings for {job_listings[0]['Company']}")
-    elif deleted:
-        st.write("## Deleted Job Postings")
-    elif admin_id:
-        st.write(f"## All Job Postings")
-    else:
-        st.write("## All Job Postings")
-with col2:
-    if recruiter_id:
-        if st.button("Create a new job listing"):
-            st.session_state["create_modal"] = True
+if my_job_postings:
+    st.write("# My Job Postings")
+elif company_id:
+    st.write(f"# Job Postings for {job_listings[0]['Company']}")
+elif deleted:
+    st.write("# Deleted Job Postings")
+elif admin_id:
+    st.write(f"# All Job Postings")
+else:
+    st.write("# All Job Postings")
+
+if recruiter_id:
+    if st.button("Create a new job listing"):
+        st.session_state["create_modal"] = True
+        
 # Modal for writing a review
 if st.session_state["create_modal"]:
     create_job_listing_modal(recruiter_id)

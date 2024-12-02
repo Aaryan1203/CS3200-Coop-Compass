@@ -17,4 +17,7 @@ def company_component(company, num_job_listings):
                     type='secondary'):
                 st.session_state['company_id'] = company['Company ID']
                 st.session_state['show_deleted'] = False
+                st.session_state['show_flagged'] = False
+                st.session_state['show_my_flagged'] = False
+                st.session_state['my_job_postings'] = False
                 st.switch_page('pages/Job_Listings_Page.py')
