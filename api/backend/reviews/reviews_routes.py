@@ -225,3 +225,27 @@ def toggle_delete_review(review_id):
     response = make_response(jsonify({"message": "Review updated."}))
     response.status_code = 200
     return response
+
+#------------------------------------------------------------
+# Get average job satisfaction
+#------------------------------------------------------------
+@reviews.route('/recruiter/<recruiter_id>/analytics', methods=['GET'])
+def get_recruiter_analytics(recruiter_id):
+    query = '''
+        SELECT 
+            AVG(r.jobSatisfaction) AS averageJobSatisfaction,
+            COUNT(r.reviewId) AS numberOfReviews
+        FROM 
+            review r
+        JOIN 
+            jobListing j ON r.jobListingId = j.jobListingId
+        WHERE 
+            j.recruiterId = %s;
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response

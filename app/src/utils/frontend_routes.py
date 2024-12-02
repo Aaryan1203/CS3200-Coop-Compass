@@ -124,3 +124,11 @@ def unflag_review(review_id):
 
 def get_students_for_advisor(advisor_id):
     return fetch_data(f'/s/students/advisor/{advisor_id}')
+
+#----------------- Recruiter Analytics -----------------#
+
+def get_recruiter_analytics(recruiter_id):
+    """
+    Fetch recruiter analytics: average job satisfaction and number of reviews.
+    """
+    return fetch_data(f'/recruiter/{recruiter_id}/analytics')
