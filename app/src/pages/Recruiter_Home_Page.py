@@ -54,3 +54,8 @@ if st.button('View all my Flagged Reviews',
   st.session_state['show_deleted'] = False
   st.session_state['job_listing_id'] = False
   st.switch_page('pages/Reviews_Page.py')
+
+if st.button('View my Job Analytics',
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/Recruiter_Analytics.py')
