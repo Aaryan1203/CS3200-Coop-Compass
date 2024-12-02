@@ -4,7 +4,7 @@ from utils.review_modals import delete_review_modal
 from utils.review_modals import flag_review_modal
 from utils.frontend_routes import unflag_review
 
-def review_component(review, recruiter_id, my_reviews=False, is_flagged=False, admin_id=False):
+def review_component(review, recruiter_id = False, student_id = False, my_reviews=False, is_flagged=False, admin_id=False):
     delete_modal_key = f"delete_modal_{review['Review ID']}"
     edit_modal_key = f"edit_modal_{review['Review ID']}"
     flag_modal_key = f"flag_modal_{review['Review ID']}"
@@ -18,8 +18,8 @@ def review_component(review, recruiter_id, my_reviews=False, is_flagged=False, a
 
     student_name = review['Student Name'] if not review['Anonymous'] else 'Anonymous'
     job_title = f"{review['Job Title']} at {review['Company']}"
-
-    with st.expander(f"{job_title} - {student_name}" if my_reviews else student_name):
+    show_name = my_reviews or student_id
+    with st.expander(f"{job_title} - {student_name}" if show_name else student_name):
         col1, col2, col3 = st.columns(3)
         with col1:
             st.write("**Job Satisfaction**")
