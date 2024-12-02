@@ -32,6 +32,7 @@ if st.button('View all Job Postings',
              use_container_width=True):
   st.session_state['my_job_postings'] = False
   st.session_state['show_deleted'] = False
+  st.session_state['show_flagged'] = False
   st.switch_page('pages/Job_Listings_Page.py')
 
 if st.button('View all Deleted Job Postings', 
@@ -39,16 +40,22 @@ if st.button('View all Deleted Job Postings',
              use_container_width=True):
   st.session_state['my_job_postings'] = False
   st.session_state['show_deleted'] = True
+  st.session_state['show_flagged'] = False
   st.switch_page('pages/Job_Listings_Page.py')
 
 if st.button('View all Flagged Reviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.session_state['show_flagged'] = True
+  st.session_state['show_deleted'] = False
+  st.session_state['job_listing_id'] = False
+  st.session_state['show_my_flagged'] = False
+  st.switch_page('pages/Reviews_Page.py')
 
 if st.button('View all Deleted Reviews', 
              type='primary',
              use_container_width=True):
+  st.session_state['show_flagged'] = False
   st.session_state['show_deleted'] = True
   st.session_state['job_listing_id'] = False
   st.switch_page('pages/Reviews_Page.py')

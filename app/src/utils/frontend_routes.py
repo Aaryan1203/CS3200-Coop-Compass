@@ -102,14 +102,23 @@ def get_reviews_by_student(student_id):
 def get_deleted_reviews():
     return fetch_data('/r/reviews/deleted')
 
+def get_flagged_reviews():
+    return fetch_data('/r/reviews/flagged')
+
 def create_review(data):
     return create_data('/r/review', data)
 
 def edit_review(data):
     return edit_data('/r/review', data)
 
+def flag_review(data):
+    return create_data('/r/review/flag', data)
+
 def toggle_delete_review(review_id):
     return delete_data(f'/r/review/{review_id}')
+
+def unflag_review(review_id):
+    return delete_data(f'/r/review/unflag/{review_id}')
 
 #----------------- Advisors -----------------#
 

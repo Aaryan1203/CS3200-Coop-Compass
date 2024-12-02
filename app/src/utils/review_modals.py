@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 from utils.frontend_routes import create_review
 from utils.frontend_routes import edit_review
 from utils.frontend_routes import toggle_delete_review
+from utils.frontend_routes import flag_review
 
 def create_review_modal(job_listing_id, student_id):
     st.write("### Write a Review")
@@ -59,3 +60,19 @@ def delete_review_modal(review, delete_modal_key):
         st.session_state[delete_modal_key] = False
     if st.button("Cancel", key=f"cancel_delete_{review['Review ID']}"):
         st.session_state[delete_modal_key] = False
+
+def flag_review_modal(review, flag_modal_key):
+    st.write("### Flag Review")
+    st.write("Please provide a reason for flagging this review.")
+    reason = st.text_area("Reason")
+    if st.button("Submit Flag", key=f"submit_flag_{review['Review ID']}"):
+        payload = {
+            "reviewId": review['Review ID'],
+            "flaggedById": review['Recruiter ID'],
+            "reason": reason,
+        }
+        flag_review(payload)
+        st.success(f"Review for {review['Job Title']} flagged successfully!")
+        st.session_state[flag_modal_key] = False
+    if st.button("Cancel Flag", key=f"cancel_flag_{review['Review ID']}"):
+        st.session_state[flag_modal_key] = False

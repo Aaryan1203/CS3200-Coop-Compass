@@ -27,11 +27,11 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
             st.write(f"${job.get('Hourly Wage', 'N/A')} per hour")
             st.write("**Location**")
             st.write(job.get('Location', 'N/A'))
-            st.write("**All Reviews**")
             if st.button(f"{num_reviews} {'Review' if num_reviews == 1 else 'Reviews'}",
                     key=f"reviews_button_{job['Job Listing ID']}",
                     type='secondary'):
                 st.query_params.job_listing_id = job['Job Listing ID']
+                st.session_state['job_title'] = f"{job['Job Title']} at {job['Company']}" 
                 st.session_state['job_listing_id'] = job['Job Listing ID']
                 st.switch_page('pages/Reviews_Page.py')
             if my_job_postings:

@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `flaggedReview`
     `reviewId`        VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
     `flaggedById`     VARCHAR(255) NOT NULL REFERENCES `recruiter` (`recruiterId`),
     `reason`          TEXT         NOT NULL,
-    `dateFlagged`     TIMESTAMP    NOT NULL,
+    `dateFlagged`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
     PRIMARY KEY (`reviewId`, `flaggedById`)
 );
 
