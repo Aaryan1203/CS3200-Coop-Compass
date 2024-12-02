@@ -14,7 +14,7 @@ def review_component(review, my_reviews=False):
     student_name = review['Student Name'] if not review['Anonymous'] else 'Anonymous'
     job_title = f"{review['Job Title']} at {review['Company']}"
 
-    with st.expander(job_title if my_reviews else student_name):
+    with st.expander(f"{job_title} - {student_name}" if my_reviews else student_name):
         col1, col2 = st.columns(2)
         with col1:
             st.write("**Job Satisfaction**")
