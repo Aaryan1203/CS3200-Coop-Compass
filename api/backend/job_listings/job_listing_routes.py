@@ -243,20 +243,3 @@ def toggle_favorite_job_listing():
     response = make_response(jsonify({"message": "Favorite job listing updated"}))
     response.status_code = 200
     return response
-
-#------------------------------------------------------------
-# Get all companies
-#------------------------------------------------------------
-@job_listings.route('/companies', methods=['GET'])
-def get_all_companies():
-    query = '''
-        SELECT name as Name, headline as Headline, description as Description, websiteLink as 'Website Link', companyId as 'Company ID'
-        FROM company
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response

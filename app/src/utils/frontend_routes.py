@@ -54,7 +54,7 @@ def delete_data(endpoint):
 #----------------- Companies -----------------#
 
 def get_all_companies():
-    return fetch_data('/j/companies')
+    return fetch_data('/c/companies')
 
 #----------------- Job Listings -----------------#
 
@@ -128,7 +128,4 @@ def get_students_for_advisor(advisor_id):
 #----------------- Recruiter Analytics -----------------#
 
 def get_recruiter_analytics(recruiter_id):
-    """
-    Fetch recruiter analytics: average job satisfaction and number of reviews.
-    """
     return fetch_data(f'/recruiter/{recruiter_id}/analytics')
