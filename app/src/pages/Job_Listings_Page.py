@@ -112,7 +112,7 @@ if isinstance(job_listings, list):
                 ]
             )
             job_listing_component(job, num_reviews, student_id, advisor_id)
-    if advisor_id:
+    else:
         for job in job_listings:
             num_reviews = len(
                 [
