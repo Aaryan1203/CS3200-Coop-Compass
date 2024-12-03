@@ -1,18 +1,21 @@
 /* styles.css */
 
-/* Remove the persistent white header */
+/* Remove the white header at the top */
 [data-testid="stHeader"] {
-    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
 }
 
-/* General page styling */
+/* Set background color for the entire page */
 body {
     background-color: #000000 !important;
-    color: #ffffff !important; /* Ensure all text is white */
+    color: #e0e0e0 !important; /* Default text color to white */
 }
+
+/* Main app background */
 .stApp {
     background-color: #000000 !important;
-    margin-top: -50px !important; /* Adjust page content position */
 }
 
 /* Sidebar styling */
@@ -20,82 +23,122 @@ body {
     background-color: #1a1a1a !important;
 }
 
-/* Header styling */
-h2.main-header {
-    text-align: center !important;
-    font-size: 2.5rem !important; /* Slightly larger font size */
-    font-weight: bold !important;
-    color: #ffffff !important; /* Pure white text */
-    margin-top: 20px !important; /* Adjust spacing above */
-    margin-bottom: 15px !important; /* Adjust spacing below */
+/* Global text override to force white */
+* {
+    color: #e0e0e0 !important; /* Universal text color to white */
+    text-shadow: none !important;
 }
-h2.main-header::after {
+
+/* Refined Header Styling */
+h1 {
+    text-align: center !important;
+    font-weight: 600 !important;
+    padding: 5px 0 !important;
+    margin-top: -10px !important;
+    margin-bottom: 50px !important;
+    background-color: #1a1a1a !important;
+    border-radius: 10px !important;
+}
+
+h1::after {
     content: "";
     display: block;
-    width: 90%; /* Underline width */
-    height: 2px; /* Underline thickness */
-    background-color: #ffffff !important; /* White underline */
-    margin: 10px auto; /* Center the underline */
+    width: 50%;
+    height: 1px !important;
+    background-color: #ffffff !important;
+    margin: 10px auto 20px;
 }
 
-/* Card styling for reviews */
+/* Add light grey outline for ALL container sections */
 [data-testid="stExpander"] {
-    border: 1px solid #cccccc !important; /* Light grey border */
+    border: 1px solid #cccccc !important;
     border-radius: 10px !important;
-    background-color: #1a1a1a !important; /* Dark grey background */
-    margin-bottom: 10px !important;
-}
-
-/* Ensure text inside cards remains white */
-[data-testid="stExpander"] div, 
-[data-testid="stExpander"] span,
-textarea, input {
-    color: #ffffff !important; /* Ensure text is always white */
-    background-color: #1a1a1a !important; /* Background dark for inputs */
-}
-
-/* Button styling */
-div.stButton > button {
-    background-color: #0047AB !important; /* Solid blue background */
-    color: #ffffff !important; /* White text */
-    border-radius: 5px !important;
-    padding: 10px 20px !important;
-    border: none !important;
-    font-size: 1rem !important;
-}
-
-div.stButton > button:hover {
-    background-color: #003366 !important; /* Slightly darker blue on hover */
-    color: #ffffff !important;
-}
-
-/* Slider styling */
-[data-testid="stSlider"] .css-1wy0on6 {
-    color: #ffffff !important; /* White slider label text */
-}
-
-/* Placeholder and input styling */
-textarea, input {
-    color: #ffffff !important; /* Ensure text in inputs is white */
+    padding: 15px !important;
     background-color: #1a1a1a !important;
-    border: 1px solid #ffffff !important; /* White border for input fields */
+    margin-bottom: 10px !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
+/* Add alternating background colors for boxes */
+[data-testid="stExpander"]:nth-child(odd) {
+    background-color: #252525 !important;
+}
+
+[data-testid="stExpander"]:nth-child(even) {
+    background-color: #1a1a1a !important;
+}
+
+/* Add hover effect to entire card */
+[data-testid="stExpander"]:hover {
+    background-color: #333333 !important;
+}
+
+/* Add hover effect only to the company name in collapsed view */
+[data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+    color: #e0e0e0 !important;
+}
+
+[data-testid="stExpander"]:hover > div[aria-expanded="false"] > div:first-child span:first-child {
+    color: #0047AB !important;
+}
+
+/* Reset other elements inside the card to default text color */
+[data-testid="stExpander"] div[aria-expanded="true"] span,
+[data-testid="stExpander"] div[aria-expanded="true"] * {
+    color: #e0e0e0 !important;
+}
+
+/* Smooth transition for hover effect */
+[data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+    transition: color 0.3s ease-in-out !important;
+}
+
+/* Links and buttons */
+a, div.stButton > button {
+    color: #bb86fc !important;
+}
+div.stButton > button {
+    background-color: #0047AB !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease-in-out !important;
+}
+div.stButton > button:hover {
+    transform: scale(1.05) !important;
+    background-color: #003366 !important;
+}
+
+/* Dropdowns and other input fields */
+.css-1cpxqw2, .css-1n543e5, .css-2hb19z {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Placeholder text */
 ::placeholder {
-    color: #cccccc !important; /* Light grey placeholder text */
+    color: #000000 !important;
+    opacity: 1 !important;
 }
 
-/* Ensure all text remains white globally */
-* {
-    color: #ffffff !important;
+/* Smooth animations for expanding sections */
+[data-testid="stExpander"] > div {
+    transition: all 0.3s ease-in-out !important;
 }
 
-/* General responsive design */
+/* Ensure white text for Markdown-rendered content */
+.stMarkdown, .stMarkdown div, .stMarkdown span {
+    color: #e0e0e0 !important;
+}
+
+/* Make the page responsive */
 @media (max-width: 768px) {
-    h2.main-header {
-        font-size: 2rem !important; /* Adjust header size */
+    h1 {
+        font-size: 1.8rem !important;
     }
+
     [data-testid="stExpander"] {
-        padding: 10px !important; /* Smaller padding for cards */
+        padding: 10px !important;
+        margin-bottom: 5px !important;
     }
 }

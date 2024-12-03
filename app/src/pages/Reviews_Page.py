@@ -22,6 +22,8 @@ job_title = st.session_state.get('job_title', None)
 show_my_flagged = st.session_state.get('show_my_flagged', None)
 admin_id = st.session_state.get('admin_id', None)
 
+load_css("./styles/reviews_page_styles.css")
+
 reviews = []
 if job_listing_id:
     try: 
@@ -45,8 +47,6 @@ except:
 
 if show_my_flagged:
     reviews = [review for review in flagged_reviews if recruiter_id == review['Recruiter ID']]
-
-load_css("./styles/reviews_page_styles.css")
 
 SideBarLinks()
 
