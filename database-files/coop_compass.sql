@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `reviewResource`;
 DROP TABLE IF EXISTS `resource`;
 DROP TABLE IF EXISTS `flaggedReview`;
 DROP TABLE IF EXISTS `review`;
-DROP TABLE IF EXISTS `sentJobListing`;
+DROP TABLE IF EXISTS `sentJobListings`;
 DROP TABLE IF EXISTS `favoriteJobListings`;
 DROP TABLE IF EXISTS `jobListing`;
 DROP TABLE IF EXISTS `company`;
@@ -119,12 +119,12 @@ CREATE TABLE IF NOT EXISTS `flaggedReview`
     PRIMARY KEY (`reviewId`, `flaggedById`)
 );
 
-CREATE TABLE IF NOT EXISTS `sentJobListing`
+CREATE TABLE IF NOT EXISTS `sentJobListings`
 (
     `jobListingId`     VARCHAR(255) NOT NULL REFERENCES `jobListing` (`jobListingId`),
     `studentId`        VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
-    `advisorCreatedId` VARCHAR(255) NOT NULL REFERENCES `advisor` (`advisorId`),
-    PRIMARY KEY (`jobListingId`, `studentId`, `advisorCreatedId`)
+    `advisorId`        VARCHAR(255) NOT NULL REFERENCES `advisor` (`advisorId`),
+    PRIMARY KEY (`jobListingId`, `studentId`, `advisorId`)
 );
 
 insert into `admin` (`adminId`, `name`, `email`, `phoneNumber`) values 
@@ -421,7 +421,7 @@ VALUES ('100', 'job_1'),
 --        ('Rev2', 'Rcrt2', 'Misleading content', '2024-06-15'),
 --        ('Rev3', 'Rcrt3', 'False information', '2024-07-15');
 
--- INSERT IGNORE INTO `sentJobListing` (`jobListingId`, `studentId`, `advisorCreatedId`)
--- VALUES ('J1', 'S1', 'Adv1'),
---        ('J2', 'S2', 'Adv2'),
---        ('J3', 'S3', 'Adv3');
+INSERT INTO `sentJobListings` (`jobListingId`, `studentId`, `advisorId`)
+VALUES ('job_1', '100', '1'),
+        ('job_2', '111', '1'),
+        ('job_3', '121', '1');

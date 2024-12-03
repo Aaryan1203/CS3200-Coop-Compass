@@ -209,6 +209,41 @@ def get_favorite_job_listings(student_id):
     return response
 
 #------------------------------------------------------------
+# Get all sent job listings for students
+#------------------------------------------------------------
+@job_listings.route('/job_listings/received/<student_id>', methods=['GET'])
+def get_sent_job_listings_for_students(student_id):
+    query = f'''
+        SELECT *
+        FROM sentJobListings
+        WHERE studentId = '{str(student_id)}'
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+
+#------------------------------------------------------------
+# Get all sent job listings for advisors
+#------------------------------------------------------------
+@job_listings.route('/job_listings/sent/<advisor_id>', methods=['GET'])
+def get_sent_job_listings_for_advisors(advisor_id):
+    query = f'''
+        SELECT *
+        FROM sentJobListings
+        WHERE advisorId = '{str(advisor_id)}'
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchall()
+    response = make_response(jsonify(theData))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
 # Toggle favorite job listing
 #------------------------------------------------------------
 @job_listings.route('/job_listing/favorite', methods=['POST'])
@@ -241,5 +276,42 @@ def toggle_favorite_job_listing():
     cursor.execute(query)
     db.get_db().commit()
     response = make_response(jsonify({"message": "Favorite job listing updated"}))
+    response.status_code = 200
+    return response
+
+#------------------------------------------------------------
+# Toggle sent job listing
+#------------------------------------------------------------
+@job_listings.route('/job_listing/sent', methods=['POST'])
+def toggle_sent_job_listing():
+    data = request.json
+    job_listing_id = data['jobListingId']
+    student_id = data['studentId']
+    advisor_id = data['advisorId']
+    
+    query = f'''
+        SELECT *
+        FROM sentJobListings
+        WHERE jobListingId = '{str(job_listing_id)}' AND studentId = '{str(student_id)}' AND advisorId = '{str(advisor_id)}'
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    theData = cursor.fetchone()
+    
+    if theData:
+        query = f'''
+            DELETE FROM sentJobListings
+            WHERE jobListingId = '{str(job_listing_id)}' AND studentId = '{str(student_id)}' AND advisorId = '{str(advisor_id)}'
+        '''
+    else:
+        query = f'''
+            INSERT INTO sentJobListings (jobListingId, studentId, advisorId)
+            VALUES ('{str(job_listing_id)}', '{str(student_id)}', '{str(advisor_id)}')
+        '''
+    
+    cursor.execute(query)
+    db.get_db().commit()
+    response = make_response(jsonify({"message": "Sent job listing updated"}))
     response.status_code = 200
     return response

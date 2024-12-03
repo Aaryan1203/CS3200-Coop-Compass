@@ -13,6 +13,7 @@ from utils.frontend_routes import (
     get_job_listings_by_recruiter,
     get_favorite_job_listings,
     get_deleted_job_listings,
+    get_received_job_listings,
 )
 from utils.job_listing_modals import create_job_listing_modal
 from utils.style_utils import load_css
@@ -59,6 +60,11 @@ try:
 except:
     st.write("**Important**: Could not connect to API.")
 
+try:
+    sent_jobs = get_received_job_listings(student_id)
+except:
+    st.write("**Important**: Could not connect to API.")
+
 load_css("./styles/job_listings_page_styles.css")
 
 SideBarLinks()
@@ -85,13 +91,15 @@ if st.session_state["create_modal"]:
 text_input = search_bar("Jobs")
 # Extract just the 'Job Listing ID' values from favorite_job_listings
 favorite_job_ids = [fav['Job Listing ID'] for fav in favorite_job_listings]
+sent_jobs_ids = [sent['jobListingId'] for sent in sent_jobs]
 
 if isinstance(job_listings, list):
     # Filter job listings based on search input
     filtered_job_listings = filter_job_listings(job_listings, text_input)
-    logger.info(f"Student IDDD: {student_id}")
+    logger.info(f"Student ID: {student_id}")
     if student_id:
         favorite_jobs = [job for job in filtered_job_listings if job['Job Listing ID'] in favorite_job_ids]
+        sent_jobs = [job for job in filtered_job_listings if job['Job Listing ID'] in sent_jobs_ids]
         other_jobs = [job for job in filtered_job_listings if job['Job Listing ID'] not in favorite_job_ids]
         # Display favorite job listings
         if favorite_jobs:
@@ -99,7 +107,13 @@ if isinstance(job_listings, list):
             for job in favorite_jobs:
                 num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
                 job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=True)
+        if sent_jobs:
+            st.write("## Jobs Sent to You")
+            for job in sent_jobs:
+                num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
+                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=False, is_sent=True)
             st.write("## Other Job Listings")
+        
         # Display other job listings
         if other_jobs:
             for job in other_jobs:

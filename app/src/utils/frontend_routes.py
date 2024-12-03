@@ -88,6 +88,16 @@ def edit_job_listing(data):
 def toggle_delete_job_listing(job_listing_id):
     return delete_data(f'/j/job_listing/{job_listing_id}')
 
+def toggle_sent_job_listing(data):
+    return create_data('/j/job_listing/sent', data)
+
+def get_sent_job_listings(advisor_id):
+    return fetch_data(f'/j/job_listings/sent/{advisor_id}')
+
+def get_received_job_listings(student_id):
+    return fetch_data(f'/j/job_listings/received/{student_id}')
+
+
 #----------------- Reviews -----------------#
 
 def get_all_reviews():
