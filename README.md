@@ -72,3 +72,10 @@ We welcome contributions! To contribute:
 4. Open a pull request.
 
 Thank you for being a part of the Coop Compass project! 🚀
+
+**Credits To:**
+- Aaryan Jain
+- Rodrido Aldrey
+- Gavin Bond
+- Sheyan Lalani
+- Samuel Seelan
