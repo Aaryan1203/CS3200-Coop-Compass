@@ -140,4 +140,4 @@ def get_advisor_analytics(advisor_id):
 #----------------- Recruiter Analytics -----------------#
 
 def get_recruiter_analytics(recruiter_id):
-    return fetch_data(f'/recruiter/{recruiter_id}/analytics')
+    return fetch_data(f'/r/recruiter/{recruiter_id}/analytics')

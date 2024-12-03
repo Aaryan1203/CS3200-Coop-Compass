@@ -232,7 +232,7 @@ def toggle_delete_review(review_id):
 #------------------------------------------------------------
 @reviews.route('/recruiter/<recruiter_id>/analytics', methods=['GET'])
 def get_recruiter_analytics(recruiter_id):
-    query = '''
+    query = f'''
         SELECT 
             AVG(r.jobSatisfaction) AS averageJobSatisfaction,
             COUNT(r.reviewId) AS numberOfReviews
@@ -241,7 +241,7 @@ def get_recruiter_analytics(recruiter_id):
         JOIN 
             jobListing j ON r.jobListingId = j.jobListingId
         WHERE 
-            j.recruiterId = %s;
+            j.recruiterId = '{recruiter_id}';
     '''
     
     cursor = db.get_db().cursor()
