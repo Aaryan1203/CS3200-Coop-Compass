@@ -32,8 +32,8 @@ if recruiter_id:
     try:
         analytics = get_recruiter_analytics(recruiter_id)
         if analytics:
-            st.metric(label="Average Job Satisfaction", value=f"{analytics.get('averageJobSatisfaction', 0):.2f}")
-            st.metric(label="Number of Reviews", value=analytics.get('numberOfReviews', 0))
+            st.metric(label="Average Job Satisfaction", value=analytics[0].get('averageJobSatisfaction', 0))
+            st.metric(label="Number of Reviews", value=analytics[0].get('numberOfReviews', 0))
         else:
             st.error("No analytics data found for this recruiter.")
     except Exception as e:
