@@ -57,8 +57,8 @@ if recruiter_id:
     try: 
         listings = get_job_listings_by_recruiter(recruiter_id)
         reviews = get_all_reviews()
-        
-        st.subheader("Analytics Shown For Your Job Listings:")
+
+        st.subheader("Analytics Shown For Your Job Postings:")
         text_input = search_bar("Jobs")
 
         if listings:
