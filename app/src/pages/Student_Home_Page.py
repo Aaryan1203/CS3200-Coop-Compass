@@ -2,7 +2,7 @@ import streamlit as st
 from modules.nav import SideBarLinks
 from utils.frontend_routes import get_reviews_by_student
 from utils.frontend_routes import get_all_companies
-from utils.frontend_routes import get_all_job_listings
+from utils.frontend_routes import get_all_job_listings, get_received_job_listings
 from utils.style_utils import load_css
 
 # Set page configuration
@@ -33,9 +33,10 @@ companies = get_all_companies()[:10]
 job_postings = get_all_job_listings()[:10]
 student_id = st.session_state.get("student_id", "100")
 all_reviews = get_reviews_by_student(student_id)[:10]
+recieved_job_listings = get_received_job_listings(student_id)[:10]
 
 # Create a grid layout for the actions
-cols = st.columns(3, gap="large")
+cols = st.columns(4, gap="large")
 
 # Companies Section
 with cols[0]:
@@ -73,6 +74,8 @@ with cols[1]:
         st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     st.markdown(
@@ -104,6 +107,31 @@ with cols[2]:
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{r.get('Description', 'N/A')} - Satisfaction: {r.get('Job Satisfaction', 'N/A')}</li>" for r in all_reviews]) +
+        "</ul></div>",
+        unsafe_allow_html=True,
+    )
+
+with cols[3]:
+    st.markdown(
+        """
+        <div class="card">
+            <h3>View My Recieved Job Listings</h3>
+            <p>See my recieved job listings.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    if st.button("View My Recieved listings", use_container_width=True):
+        st.session_state['show_recieved_jobs'] = True
+        st.session_state['company_id'] = False
+        st.session_state['my_job_postings'] = False
+        st.session_state['show_deleted'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.switch_page("pages/Job_Listings_Page.py")
+    
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in recieved_job_listings]) +
         "</ul></div>",
         unsafe_allow_html=True,
     )

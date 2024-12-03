@@ -214,8 +214,10 @@ def get_favorite_job_listings(student_id):
 @job_listings.route('/job_listings/received/<student_id>', methods=['GET'])
 def get_sent_job_listings_for_students(student_id):
     query = f'''
-        SELECT *
-        FROM sentJobListings
+        SELECT JL.jobListingId as 'Job Listing ID', JL.jobTitle as 'Job Title', JL.description as Description, JL.startDate as 'Start Date', JL.endDate as 'End Date', JL.hourlyWage as 'Hourly Wage', JL.skills as Skills, JL.location as Location, C.name as Company, C.companyId as 'Company ID'
+        FROM sentJobListings SJL
+        JOIN jobListing JL ON SJL.jobListingId = JL.jobListingId
+        JOIN company C ON JL.companyId = C.companyId
         WHERE studentId = '{str(student_id)}'
     '''
     cursor = db.get_db().cursor()
@@ -232,9 +234,12 @@ def get_sent_job_listings_for_students(student_id):
 @job_listings.route('/job_listings/sent/<advisor_id>', methods=['GET'])
 def get_sent_job_listings_for_advisors(advisor_id):
     query = f'''
-        SELECT *
-        FROM sentJobListings
-        WHERE advisorId = '{str(advisor_id)}'
+        SELECT JL.jobListingId as 'Job Listing ID', JL.jobTitle as 'Job Title', JL.description as Description, JL.startDate as 'Start Date', JL.endDate as 'End Date', JL.hourlyWage as 'Hourly Wage', JL.skills as Skills, JL.location as Location, C.name as Company, C.companyId as 'Company ID', S.studentId as 'Student ID'
+        FROM sentJobListings SJL
+        JOIN jobListing JL ON SJL.jobListingId = JL.jobListingId
+        JOIN company C ON JL.companyId = C.companyId
+        JOIN student S ON SJL.studentId = S.studentId
+        WHERE SJL.advisorId = '{str(advisor_id)}'
     '''
     cursor = db.get_db().cursor()
     cursor.execute(query)

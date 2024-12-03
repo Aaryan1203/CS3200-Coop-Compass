@@ -83,6 +83,8 @@ with cols[1]:
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_flagged'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Job_Listings_Page.py')
     # Preview for All Job Postings
     st.markdown(
@@ -109,6 +111,8 @@ with cols[2]:
         st.session_state['show_deleted'] = False
         st.session_state['show_flagged'] = False
         st.session_state['show_my_flagged'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Job_Listings_Page.py')
     # Preview for Recruiter's Job Postings
     st.markdown(
@@ -134,6 +138,8 @@ with cols[3]:
         st.session_state['show_my_flagged'] = True
         st.session_state['show_deleted'] = False
         st.session_state['job_listing_id'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Reviews_Page.py')
     # Preview for Flagged Reviews
     # st.markdown(

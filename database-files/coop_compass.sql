@@ -140,7 +140,7 @@ insert into `admin` (`adminId`, `name`, `email`, `phoneNumber`) values
 ('10', 'Paolina', 'pdymocke9@chicagotribune.com', 5709425554);
 
 insert into `advisor` (`advisorId`, `name`, `email`, `phoneNumber`) values 
-('1', 'Andres', 'aeplate0@ehow.com', 1097505450),
+('1', 'Rachel', 'aeplate0@ehow.com', 1097505450),
 ('2', 'Johannah', 'jpolin1@mtv.com', 6429056148),
 ('3', 'Clarance', 'ccaselick2@rambler.ru', 9756653194),
 ('4', 'Cheslie', 'cnorley3@barnesandnoble.com', 9869398550),

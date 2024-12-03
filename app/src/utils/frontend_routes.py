@@ -24,6 +24,7 @@ def create_data(endpoint, data):
         response = requests.post(f"{BASE_API_URL}{endpoint}", json=data)
         logging.info(f"Creating data in {BASE_API_URL}/{endpoint}")
         response.raise_for_status()
+        logger.info(f"Responseeeeee: {response.json()}")
         return response.json()
     except requests.RequestException as e:
         st.error(f"Error creating data in {endpoint}: {e}")

@@ -4,8 +4,12 @@ from utils.style_utils import load_css
 from utils.frontend_routes import (
     get_all_reviews,
     get_students_for_advisor,
-    get_all_job_listings
+    get_all_job_listings,
+    get_sent_job_listings
 )
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Set page configuration
 st.set_page_config(
@@ -32,10 +36,11 @@ st.markdown(
 )
 
 # Fetching data using helper functions
-advisor_id = 200  # Example advisor ID
+advisor_id = 1  # Example advisor ID
 reviews = get_all_reviews()[:10]  # Fetch top 10 reviews
 students = get_students_for_advisor(advisor_id)[:10]  # Fetch top 10 students
 job_postings = get_all_job_listings()[:10]  # Fetch top 10 job postings
+sent_job_postings = get_sent_job_listings(advisor_id)[:10]  # Fetch top 10 sent job postings
 
 # Create columns to align all cards side by side
 cols = st.columns(4, gap="large")
@@ -92,10 +97,16 @@ with cols[2]:
         unsafe_allow_html=True
     )
     if st.button("View My Sent Job Listings", use_container_width=True):
+        st.session_state['company_id'] = False
+        st.session_state['my_job_postings'] = False
+        st.session_state['show_deleted'] = False
+        st.session_state['show_flagged'] = False
+        st.session_state['show_sent_jobs'] = True
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
-        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in job_postings]) +
+        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in sent_job_postings]) +
         "</ul></div>",
         unsafe_allow_html=True
     )
@@ -115,6 +126,8 @@ with cols[3]:
         st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     # Preview for All Job Postings

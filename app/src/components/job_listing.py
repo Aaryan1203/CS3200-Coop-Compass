@@ -2,9 +2,11 @@ import streamlit as st
 from utils.job_listing_modals import delete_job_listing_modal
 from utils.job_listing_modals import edit_job_listing_modal
 from utils.frontend_routes import toggle_favorite_job_listing
-from utils.frontend_routes import get_students_for_advisor
+from utils.frontend_routes import get_students_for_advisor, toggle_sent_job_listing
+import logging
+logger = logging.getLogger(__name__)
 
-def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=False, is_favorite=False, deleted=False, is_sent=False):
+def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=False, is_favorite=False, deleted=False, show_sent_jobs=False, show_recieved_jobs=False):
     delete_modal_key = f"delete_modal_{job['Job Listing ID']}"
     edit_modal_key = f"edit_modal_{job['Job Listing ID']}"
 
@@ -51,7 +53,7 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
         
         with col4:
             if advisor_id:
-                st.write("**Send to Student**")
+                st.write("**Send to Student**") if not show_sent_jobs else st.write("**Unsend to Student**")
                 try:
                     # Fetch students associated with the advisor
                     students = get_students_for_advisor(advisor_id)
@@ -60,14 +62,28 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
 
                         # Display a dropdown with student names
                         selected_student = st.selectbox(
-                            "Select a student to send this job:",
+                            "Select a student to send this job:" if not show_sent_jobs else "Select a student to unsend this job:",
                             student_names,
                         key=f"student_select_{job['Job Listing ID']}"
                         )
 
                         # Button to "send" the job to the selected student
-                        if st.button(f"Send Job to {selected_student}", key=f"send_button_{job['Job Listing ID']}"):
-                            st.success(f"Job sent to {selected_student}!")
+                        if st.button(f"Send Job to {selected_student}", key=f"send_button_{job['Job Listing ID']}") if not show_sent_jobs else st.button(f"Unsend Job to {selected_student}", key=f"unsend_button_{job['Job Listing ID']}"):
+                            try:
+                                payload = {
+                                    'jobListingId': job['Job Listing ID'],
+                                    'studentId': students[student_names.index(selected_student)]['StudentID'],
+                                    'advisorId': advisor_id
+                                }
+                                logger.info(f"Payload: {payload}")
+                                # Send the payload and wait for the response
+                                response = toggle_sent_job_listing(payload)
+
+                                # Check the response status
+                                st.success(f"Job {'sent' if not show_sent_jobs else 'unsent'} to {selected_student}!")
+                            except Exception as e:
+                                logger.error(f"Error toggling job listing: {e}")
+                                st.error(f"An error occurred: {e}")
                     else:
                         st.error("No students found for this advisor.")
                 except Exception as e:

@@ -82,6 +82,8 @@ with cols[1]:
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_flagged'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     # Preview for Job Postings
@@ -107,6 +109,8 @@ with cols[2]:
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = True
         st.session_state['show_flagged'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     # Preview for Deleted Job Postings
