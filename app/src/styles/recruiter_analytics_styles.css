@@ -43,6 +43,10 @@ h1::after {
     margin: 10px auto 20px;
 }
 
+h3 {
+    margin-top: 50px;
+}
+
 /* Subheading and General Text Styling */
 h2, h3, h4, p, label {
     color: #ffffff !important; /* Ensure all headings and general text are white */
@@ -86,6 +90,79 @@ h2, h3, h4, p, label {
     font-size: 14px;
     font-weight: bold;
     margin-top: 10px;
+
+}
+
+/* Add light grey outline for ALL container sections */
+[data-testid="stExpander"] {
+    border: 1px solid #cccccc !important;
+    border-radius: 10px !important;
+    padding: 15px !important;
+    background-color: #1a1a1a !important;
+    margin-bottom: 10px !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Add alternating background colors for boxes */
+[data-testid="stExpander"]:nth-child(odd) {
+    background-color: #252525 !important;
+}
+
+[data-testid="stExpander"]:nth-child(even) {
+    background-color: #1a1a1a !important;
+}
+
+/* Add hover effect to entire card */
+[data-testid="stExpander"]:hover {
+    background-color: #333333 !important;
+}
+
+/* Add hover effect only to the company name in collapsed view */
+[data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+    color: #e0e0e0 !important;
+}
+
+[data-testid="stExpander"]:hover > div[aria-expanded="false"] > div:first-child span:first-child {
+    color: #0047AB !important;
+}
+
+/* Reset other elements inside the card to default text color */
+[data-testid="stExpander"] div[aria-expanded="true"] span,
+[data-testid="stExpander"] div[aria-expanded="true"] * {
+    color: #e0e0e0 !important;
+}
+
+/* Smooth transition for hover effect */
+[data-testid="stExpander"] > div[aria-expanded="false"] > div:first-child span:first-child {
+    transition: color 0.3s ease-in-out !important;
+}
+
+/* Links and buttons */
+a, div.stButton > button {
+    color: #bb86fc !important;
+}
+div.stButton > button {
+    background-color: #0047AB !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease-in-out !important;
+}
+div.stButton > button:hover {
+    transform: scale(1.05) !important;
+    background-color: #003366 !important;
+}
+
+/* Dropdowns and other input fields */
+.css-1cpxqw2, .css-1n543e5, .css-2hb19z {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Smooth animations for expanding sections */
+[data-testid="stExpander"] > div {
+    transition: all 0.3s ease-in-out !important;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
