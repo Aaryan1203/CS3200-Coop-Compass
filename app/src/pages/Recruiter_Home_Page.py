@@ -11,24 +11,24 @@ from utils.frontend_routes import (
 
 logger = logging.getLogger(__name__)
 
-# Set Streamlit page configuration for a modern, wide layout
+# Set Streamlit page configuration
 st.set_page_config(
     layout="wide",
     page_title="Recruiter Home",
     page_icon="👔"
 )
 
-# Apply custom CSS for consistent dark mode theme
+# Apply custom CSS
 load_css("./styles/recruiter_home_page_styles.css")
 
-# Show appropriate sidebar links for the role of the currently logged in user
+# Sidebar Links
 SideBarLinks()
 
-# Add a hero section
+# Hero Section
 st.markdown(
-    f"""
+    """
     <div class="hero">
-        <h1>Welcome recruiter, {st.session_state['first_name']}.</h1>
+        <h1>Welcome recruiter, Quandale.</h1>
         <h3>What would you like to do today?</h3>
     </div>
     """,
@@ -37,16 +37,16 @@ st.markdown(
 
 # Fetch data for previews
 recruiter_id = st.session_state.get('recruiter_id', '300')  # Example recruiter ID
-companies = get_all_companies()[:10]
-all_job_postings = get_all_job_listings()[:10]
-my_job_postings = get_job_listings_by_recruiter(recruiter_id)[:10]
-#flagged_reviews = get_flagged_reviews_by_recruiter(recruiter_id)[:10]
+companies = get_all_companies()[:2]
+all_job_postings = get_all_job_listings()[:4]
+my_job_postings = get_job_listings_by_recruiter(recruiter_id)[:4]
 analytics = get_recruiter_analytics(recruiter_id)
 
-# Create columns for cards
-cols = st.columns(5, gap="large")
+# First Row: Columns for the first three features
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+cols = st.columns(3, gap="large")
 
-# Section: View all Companies
+# View all Companies
 with cols[0]:
     st.markdown(
         """
@@ -59,7 +59,6 @@ with cols[0]:
     )
     if st.button('View all Companies', use_container_width=True):
         st.switch_page('pages/Companies_Page.py')
-    # Preview for Companies
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{c.get('Name', 'N/A')} - {c.get('Headline', 'No Headline')}</li>" for c in companies]) +
@@ -67,7 +66,7 @@ with cols[0]:
         unsafe_allow_html=True
     )
 
-# Section: View all Job Postings
+# View all Job Postings
 with cols[1]:
     st.markdown(
         """
@@ -79,14 +78,8 @@ with cols[1]:
         unsafe_allow_html=True
     )
     if st.button('View all Job Postings', use_container_width=True):
-        st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
-        st.session_state['show_deleted'] = False
-        st.session_state['show_flagged'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Job_Listings_Page.py')
-    # Preview for All Job Postings
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in all_job_postings]) +
@@ -94,7 +87,7 @@ with cols[1]:
         unsafe_allow_html=True
     )
 
-# Section: View my Job Postings
+# View my Job Postings
 with cols[2]:
     st.markdown(
         """
@@ -106,15 +99,8 @@ with cols[2]:
         unsafe_allow_html=True
     )
     if st.button('View my Job Postings', use_container_width=True):
-        st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = True
-        st.session_state['show_deleted'] = False
-        st.session_state['show_flagged'] = False
-        st.session_state['show_my_flagged'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Job_Listings_Page.py')
-    # Preview for Recruiter's Job Postings
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in my_job_postings]) +
@@ -122,8 +108,14 @@ with cols[2]:
         unsafe_allow_html=True
     )
 
-# Section: View all my Flagged Reviews
-with cols[3]:
+# Add space before the second row
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+
+# Second Row: Columns for the remaining features
+cols = st.columns(3, gap="large")
+
+# View all my Flagged Reviews
+with cols[0]:
     st.markdown(
         """
         <div class="card">
@@ -134,23 +126,11 @@ with cols[3]:
         unsafe_allow_html=True
     )
     if st.button('View all my Flagged Reviews', use_container_width=True):
-        st.session_state['show_flagged'] = False
         st.session_state['show_my_flagged'] = True
-        st.session_state['show_deleted'] = False
-        st.session_state['job_listing_id'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
         st.switch_page('pages/Reviews_Page.py')
-    # Preview for Flagged Reviews
-    # st.markdown(
-    #     "<div class='preview'><h4>Preview:</h4><ul>" +
-    #     "".join([f"<li>{fr.get('Description', 'N/A')} - Reason: {fr.get('Reason', 'No Reason')}</li>" for fr in flagged_reviews]) +
-    #     "</ul></div>",
-    #     unsafe_allow_html=True
-    #)
 
-# Section: View my Job Analytics
-with cols[4]:
+# View my Job Analytics
+with cols[1]:
     st.markdown(
         """
         <div class="card">
@@ -162,7 +142,6 @@ with cols[4]:
     )
     if st.button('View my Job Analytics', use_container_width=True):
         st.switch_page('pages/Recruiter_Analytics.py')
-    # Preview for Analytics (if any)
     if analytics:
         st.markdown(
             f"""
