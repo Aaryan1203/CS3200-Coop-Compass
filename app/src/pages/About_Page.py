@@ -1,10 +1,19 @@
 import streamlit as st
 from modules.nav import SideBarLinks
+from utils.style_utils import load_css
+
+st.set_page_config(
+    layout="wide",
+    page_title="About Co-Op Compass",
+    page_icon="🧠"
+)
 
 SideBarLinks()
 
-st.write("# About this App")
+# Apply custom CSS
+load_css("./styles/about_page_styles.css")
 
+st.title("About Co-Op Compass")
 st.markdown (
     """
     This is a demo app for CS 3200 Course Project.  
