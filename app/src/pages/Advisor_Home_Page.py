@@ -29,7 +29,7 @@ if st.button('View my Students Reviews',
 if st.button('View my Students Analytics', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/01_World_Bank_Viz.py')
+  st.switch_page('pages/Advisor_Analytics.py')
 
 if st.button('View my Sent Job Listings', 
              type='primary',
