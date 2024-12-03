@@ -1,6 +1,6 @@
-# Fall 2024 CS 3200 Project Template Repository
+# CS 3200 - Coop Compass
 
-This repo is a template for your semester project.  It includes most of the infrastructure setup (containers) and sample code and data throughout.  Explore it fully and ask questions.
+Our project is a platform meant for previous coops and students currently on coop search. It allows company recruiters to create job listings for coops that are availble on NUworks and allows students to write personalized reviews about the jobs they had. We allow for anonymous or non-anonymous posts so that students can get in touch with other students if the posts are not anonymous. 
 
 ## Prerequisites
 

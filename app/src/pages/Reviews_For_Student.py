@@ -22,7 +22,7 @@ load_css("./styles/reviews_page_styles.css")
 SideBarLinks()
 
 if reviews:
-    student_name = reviews[0]['Student Name']  # Get the student's name from the first review
+    student_name = reviews[0]['Student Name']
     st.title(f"{student_name}'s Reviews:")
     st.write('')
     

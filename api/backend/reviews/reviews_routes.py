@@ -13,10 +13,11 @@ reviews = Blueprint('reviews', __name__)
 @reviews.route('/reviews', methods=['GET'])
 def get_all_reviews():
     query = '''
-        SELECT R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Descriotion, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', R.deleted as Deleted, J.jobTitle as 'Job Title', C.name as Company, J.recruiterId as 'Recruiter ID'
+        SELECT R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Descriotion, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', R.deleted as Deleted, J.jobTitle as 'Job Title', C.name as Company, J.recruiterId as 'Recruiter ID', S.name as 'Student Name', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number'
         FROM review R
         JOIN jobListing J ON R.jobListingId = J.jobListingId
         JOIN company C ON J.companyId = C.companyId
+        JOIN student S ON R.studentId = S.studentId
         LEFT JOIN flaggedReview FR ON R.reviewId = FR.reviewId
         WHERE R.deleted = false AND FR.reviewId IS NULL
     '''
@@ -34,7 +35,7 @@ def get_all_reviews():
 @reviews.route('/reviews/<job_listing_id>', methods=['GET'])
 def get_reviews_by_job_listing(job_listing_id):
     query = f'''
-        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID'
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number'
         FROM review R
         JOIN student S ON R.studentId = S.studentId
         JOIN jobListing J ON R.jobListingId = J.jobListingId
@@ -57,7 +58,7 @@ def get_reviews_by_job_listing(job_listing_id):
 @reviews.route('/reviews/student/<student_id>', methods=['GET'])
 def get_reviews_by_student(student_id):
     query = f'''
-        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID'
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number'
         FROM review R
         JOIN student S ON R.studentId = S.studentId
         JOIN jobListing J ON R.jobListingId = J.jobListingId
@@ -79,7 +80,7 @@ def get_reviews_by_student(student_id):
 @reviews.route('/reviews/deleted', methods=['GET'])
 def get_deleted_reviews():
     query = '''
-        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID'
+        SELECT R.reviewId as 'Review ID', R.jobListingId as 'Job Listing ID', anonymous as Anonymous, R.description as Description, jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number'
         FROM review R
         JOIN student S ON R.studentId = S.studentId
         JOIN jobListing J ON R.jobListingId = J.jobListingId
@@ -100,7 +101,7 @@ def get_deleted_reviews():
 @reviews.route('/reviews/flagged', methods=['GET'])
 def get_flagged_reviews():
     query = '''
-        SELECT FR.reviewId as 'Review ID', FR.flaggedById as 'Flagged By ID', FR.reason as Reason, R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Description, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID'
+        SELECT FR.reviewId as 'Review ID', FR.flaggedById as 'Flagged By ID', FR.reason as Reason, R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Description, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number'
         FROM flaggedReview FR
         JOIN review R ON FR.reviewId = R.reviewId
         JOIN student S ON R.studentId = S.studentId

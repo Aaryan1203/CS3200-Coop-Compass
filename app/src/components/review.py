@@ -35,6 +35,10 @@ def review_component(review, recruiter_id=False, student_id=False, my_reviews=Fa
             """,
             unsafe_allow_html=True,
         )
+        
+        if student_name not in ['Anonymous']:
+            st.write(f"Student Email: {review['Student Email']}")
+            st.write(f"Student Phone Number: {str(review['Student Phone Number'])}")
 
         if my_reviews:
             if st.button("Edit Review", key=f"edit_review_{review['Review ID']}"):
