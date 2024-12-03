@@ -30,7 +30,7 @@ body {
     padding: 20px;
     background-color: #1a1a1a; /* Black background for hero */
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased spacing below hero section */
 }
 
 .hero h1 {
@@ -50,17 +50,17 @@ body {
     padding: 20px; /* Internal padding */
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Add subtle shadow */
-    margin-bottom: 30px; /* Increased spacing between rows */
+    margin-bottom: 20px; /* Reduced spacing between rows */
 }
 
 .card h3 {
     color: #bb86fc; /* Purple card title */
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduced space below card title */
 }
 
 .card p {
     color: #e0e0e0; /* Light gray text */
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Reduced space below card description */
 }
 
 .card:hover {
@@ -75,6 +75,7 @@ div.stButton > button {
     padding: 10px 20px; /* Add internal padding */
     border: none;
     font-size: 1rem; /* Uniform button font size */
+   /* Increased space below button */
 }
 
 div.stButton > button:hover {
@@ -86,7 +87,6 @@ div.stButton > button:hover {
     text-align: left; /* Align text to the left for readability */
     color: #e0e0e0; /* Light gray text */
     font-size: 0.9rem; /* Smaller font for preview */
-    margin-top: 15px; /* Add spacing above preview */
     background-color: #1a1a1a; /* Match card background */
     padding: 10px; /* Internal padding */
     border-radius: 5px; /* Rounded edges */
@@ -96,12 +96,17 @@ div.stButton > button:hover {
 .preview h4 {
     color: #bb86fc; /* Purple heading for preview */
     font-size: 1rem;
-    margin-bottom: 10px; /* Space below heading */
+    margin-bottom: 5px; /* Reduced space below preview heading */
 }
 
 /* Adjust column spacing */
 .stColumns {
     gap: 2rem !important; /* Increase gap between columns */
+}
+
+/* Add extra space between rows */
+.row-spacing {
+    margin-top: 30px !important; /* Add space between rows of features */
 }
 
 /* Improved card layout for smaller screens */
@@ -110,7 +115,7 @@ div.stButton > button:hover {
         flex-direction: column !important; /* Stack columns vertically on small screens */
     }
 
-    .card {
-        margin-bottom: 20px; /* Reduced spacing for smaller screens */
-    }
+    /* .card {
+        margin-bottom: 20px; Reduced spacing for smaller screens
+    } */
 }

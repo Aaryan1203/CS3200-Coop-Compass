@@ -36,14 +36,17 @@ st.markdown(
 )
 
 # Fetch Data
-companies = get_all_companies()[:10]
-job_postings = get_all_job_listings()[:10]
-deleted_job_postings = get_deleted_job_listings()[:10]
-flagged_reviews = get_flagged_reviews()[:10]
-deleted_reviews = get_deleted_reviews()[:10]
+companies = get_all_companies()[:2]
+job_postings = get_all_job_listings()[:3]
+deleted_job_postings = get_deleted_job_listings()[:3]
+flagged_reviews = get_flagged_reviews()[:3]
+deleted_reviews = get_deleted_reviews()[:3]
 
 # Create Rows for Cards
 row1_cols = st.columns(3, gap="large")  # First row with 3 cards
+# Add space before second row
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+
 row2_cols = st.columns(2, gap="large")  # Second row with 2 cards
 
 # Row 1: Companies, Active Job Postings, Deleted Job Postings
