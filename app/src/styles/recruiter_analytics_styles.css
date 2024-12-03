@@ -48,63 +48,44 @@ h2, h3, h4, p, label {
     color: #ffffff !important; /* Ensure all headings and general text are white */
 }
 
-/* Search Bar Styling */
-textarea, input[type="text"] {
-    background-color: #ffffff !important;
-    color: #000000 !important; /* Black text for better input readability */
-    border: 1px solid #cccccc !important;
-    border-radius: 8px !important;
-    padding: 10px !important;
+
+/* Style for metrics */
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Optional: Add spacing above the container */
+    gap: 10px;
+    width: 100%;
 }
 
-textarea::placeholder, input[type="text"]::placeholder {
-    color: #666666 !important;
+.metric-container {
+    flex: 1;
+    background-color: #1a1a1a; /* Light gray background */
+    border: 1px solid #1a1a1a; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
-/* Student Card Styling */
-[data-testid="stExpander"] {
-    border: 1px solid #cccccc !important;
-    border-radius: 10px !important;
-    padding: 15px !important;
-    margin-bottom: 15px !important;
-    background-color: #1a1a1a !important;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
-    color: #ffffff !important; /* Ensure text inside cards is white */
+.metric-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff; /* Blue text for labels */
 }
 
-/* Alternate Background Colors for Cards */
-[data-testid="stExpander"]:nth-child(odd) {
-    background-color: #252525 !important;
+.metric-value {
+    font-size: 48px;
+    color: #007bff; /* Green text for values */
 }
 
-[data-testid="stExpander"]:nth-child(even) {
-    background-color: #1a1a1a !important;
-}
-
-/* Hover Effects for Cards */
-[data-testid="stExpander"]:hover {
-    background-color: #333333 !important;
-}
-
-/* Button Styling */
-div.stButton > button {
-    background-color: #0047AB !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    border-radius: 5px !important;
-    transition: all 0.3s ease-in-out !important;
-}
-
-div.stButton > button:hover {
-    transform: scale(1.05) !important;
-    background-color: #003366 !important;
-}
-
-/* Markdown and Content Styling */
-.stMarkdown, .stMarkdown div, .stMarkdown span {
-    color: #ffffff !important; /* Ensure Markdown content is white */
-}
+/* Style for error messages */
+.error-message {
+    color: #dc3545; /* Red text */
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
 
 /* Responsive Design */
 @media (max-width: 768px) {

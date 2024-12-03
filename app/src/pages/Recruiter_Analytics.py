@@ -30,15 +30,25 @@ SideBarLinks()
 st.title("Here are your Job Posting Analytics!")
 if recruiter_id:
 
-    # Fetch Analytics Data
+        # Fetch Analytics Data
     try:
         analytics = get_recruiter_analytics(recruiter_id)
+
         if analytics:
-            st.metric(label="Average Job Satisfaction", value=analytics[0].get('averageJobSatisfaction', 0))
-            st.metric(label="Number of Reviews", value=analytics[0].get('numberOfReviews', 0))
+            st.markdown(f"""
+            <div class="container">
+                <div class="metric-container">
+                    <div class="metric-label">Average Job Satisfaction</div>
+                    <div class="metric-value">{analytics[0].get('averageJobSatisfaction', 0)}</div>
+                </div>
+                <div class="metric-container">
+                    <div class="metric-label">Number of Reviews</div>
+                    <div class="metric-value">{analytics[0].get('numberOfReviews', 0)}</div>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
         else:
-            st.error("No analytics data found for this recruiter.")
+            st.markdown('<div class="error-message">No analytics data found for this recruiter.</div>', unsafe_allow_html=True)
     except Exception as e:
-        st.error(f"Error fetching analytics: {e}")
-else:
-    st.error("Error: Recruiter ID not found in session state. Please return to the home page.")
+        st.markdown(f'<div class="error-message">Error fetching analytics: {e}</div>', unsafe_allow_html=True)
+
