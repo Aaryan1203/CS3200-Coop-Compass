@@ -6,10 +6,17 @@ from utils.frontend_routes import (
     get_all_companies,
     get_all_job_listings,
     get_job_listings_by_recruiter,
+    get_flagged_reviews,
     get_recruiter_analytics
 )
 
 logger = logging.getLogger(__name__)
+
+# Define the function to filter flagged reviews by recruiter
+def get_flagged_reviews_by_recruiter(recruiter_id):
+    """Fetch flagged reviews for a specific recruiter."""
+    all_flagged_reviews = get_flagged_reviews()  # Get all flagged reviews
+    return [review for review in all_flagged_reviews if review.get('recruiter_id') == recruiter_id]
 
 # Set Streamlit page configuration
 st.set_page_config(
@@ -40,6 +47,7 @@ recruiter_id = st.session_state.get('recruiter_id', '300')  # Example recruiter 
 companies = get_all_companies()[:2]
 all_job_postings = get_all_job_listings()[:4]
 my_job_postings = get_job_listings_by_recruiter(recruiter_id)[:4]
+flagged_reviews = get_flagged_reviews_by_recruiter(recruiter_id)[:4]
 analytics = get_recruiter_analytics(recruiter_id)
 
 # First Row: Columns for the first three features
@@ -128,6 +136,12 @@ with cols[0]:
     if st.button('View all my Flagged Reviews', use_container_width=True):
         st.session_state['show_my_flagged'] = True
         st.switch_page('pages/Reviews_Page.py')
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{fr.get('Description', 'N/A')} - Reason: {fr.get('Reason', 'No Reason')}</li>" for fr in flagged_reviews]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
 
 # View my Job Analytics
 with cols[1]:
