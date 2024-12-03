@@ -92,7 +92,7 @@ Gain insights into feedback trends to refine recruitment strategies.
 '''
 )
 
-st.header("Co-op Advisors: Enhanced Studend Support")
+st.header("Co-op Advisors: Enhanced Student Support")
 st.markdown(
     '''
 Co-op advisors have tools to oversee and guide students effectively:
