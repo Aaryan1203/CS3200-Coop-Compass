@@ -2,6 +2,13 @@ import streamlit as st
 import logging
 from modules.nav import SideBarLinks
 from utils.style_utils import load_css
+from utils.frontend_routes import (
+    get_all_companies,
+    get_all_job_listings,
+    get_deleted_job_listings,
+    get_flagged_reviews,
+    get_deleted_reviews
+)
 
 logger = logging.getLogger(__name__)
 
@@ -11,13 +18,13 @@ st.set_page_config(
     page_icon="🛠️"
 )
 
-# Apply custom CSS for consistent dark mode theme
+# Apply custom CSS
 load_css("./styles/admin_home_page_styles.css")
 
 # Sidebar Links
 SideBarLinks()
 
-# Add a hero section
+# Hero Section
 st.markdown(
     """
     <div class="hero">
@@ -28,7 +35,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Create columns for the card layout
+# Fetch Data
+companies = get_all_companies()[:10]  # Fetch top 10 companies
+job_postings = get_all_job_listings()[:10]  # Fetch top 10 active job postings
+deleted_job_postings = get_deleted_job_listings()[:10]  # Fetch top 10 deleted job postings
+flagged_reviews = get_flagged_reviews()[:10]  # Fetch top 10 flagged reviews
+deleted_reviews = get_deleted_reviews()[:10]  # Fetch top 10 deleted reviews
+
+# Create columns for cards
 cols = st.columns(5, gap="large")
 
 # Section: View All Companies
@@ -44,6 +58,14 @@ with cols[0]:
     )
     if st.button("View all Companies", use_container_width=True):
         st.switch_page("pages/Companies_Page.py")
+
+    # Preview for Companies
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{c.get('Name', 'N/A')} - {c.get('Headline', 'No Headline')}</li>" for c in companies]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
 
 # Section: View All Job Postings
 with cols[1]:
@@ -62,6 +84,14 @@ with cols[1]:
         st.session_state['show_flagged'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
+    # Preview for Job Postings
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in job_postings]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
+
 # Section: View All Deleted Job Postings
 with cols[2]:
     st.markdown(
@@ -78,6 +108,14 @@ with cols[2]:
         st.session_state['show_deleted'] = True
         st.session_state['show_flagged'] = False
         st.switch_page("pages/Job_Listings_Page.py")
+
+    # Preview for Deleted Job Postings
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{djp.get('Job Title', 'N/A')} - {djp.get('Company', 'N/A')}</li>" for djp in deleted_job_postings]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
 
 # Section: View All Flagged Reviews
 with cols[3]:
@@ -97,6 +135,14 @@ with cols[3]:
         st.session_state['show_my_flagged'] = False
         st.switch_page("pages/Reviews_Page.py")
 
+    # Preview for Flagged Reviews
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{fr.get('Description', 'N/A')} - Reason: {fr.get('Reason', 'No Reason')}</li>" for fr in flagged_reviews]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
+
 # Section: View All Deleted Reviews
 with cols[4]:
     st.markdown(
@@ -113,3 +159,11 @@ with cols[4]:
         st.session_state['show_deleted'] = True
         st.session_state['job_listing_id'] = False
         st.switch_page("pages/Reviews_Page.py")
+
+    # Preview for Deleted Reviews
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{dr.get('Description', 'N/A')} - Satisfaction: {dr.get('Job Satisfaction', 'N/A')}</li>" for dr in deleted_reviews]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
