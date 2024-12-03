@@ -116,18 +116,18 @@ if isinstance(job_listings, list):
             st.write("## Favorite Job Listings")
             for job in favorite_jobs:
                 num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
-                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=True, show_sent_jobs=show_sent_jobs, show_recieved_jobs=show_recieved_jobs)
+                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=True, show_sent_jobs=show_sent_jobs)
         
         # Display other job listings
         if other_jobs:
             st.write("## Other Job Listings")
             for job in other_jobs:
                 num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
-                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=False, show_sent_jobs=show_sent_jobs, show_recieved_jobs=show_recieved_jobs)
+                job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=False, show_sent_jobs=show_sent_jobs)
     else:
         allow_edit = my_job_postings or admin_id
         for job in filtered_job_listings:
             num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
-            job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=allow_edit, deleted=deleted, show_sent_jobs=show_sent_jobs, show_recieved_jobs=show_recieved_jobs)
+            job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=allow_edit, deleted=deleted, show_sent_jobs=show_sent_jobs)
 else:
     st.write("No job postings available.")

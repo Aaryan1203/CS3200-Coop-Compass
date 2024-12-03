@@ -6,7 +6,7 @@ from utils.frontend_routes import get_students_for_advisor, toggle_sent_job_list
 import logging
 logger = logging.getLogger(__name__)
 
-def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=False, is_favorite=False, deleted=False, show_sent_jobs=False, show_recieved_jobs=False):
+def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=False, is_favorite=False, deleted=False, show_sent_jobs=False):
     delete_modal_key = f"delete_modal_{job['Job Listing ID']}"
     edit_modal_key = f"edit_modal_{job['Job Listing ID']}"
 
@@ -75,7 +75,6 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
                                     'studentId': students[student_names.index(selected_student)]['StudentID'],
                                     'advisorId': advisor_id
                                 }
-                                logger.info(f"Payload: {payload}")
                                 # Send the payload and wait for the response
                                 response = toggle_sent_job_listing(payload)
 
