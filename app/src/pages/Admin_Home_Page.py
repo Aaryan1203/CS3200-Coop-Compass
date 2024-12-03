@@ -36,17 +36,18 @@ st.markdown(
 )
 
 # Fetch Data
-companies = get_all_companies()[:10]  # Fetch top 10 companies
-job_postings = get_all_job_listings()[:10]  # Fetch top 10 active job postings
-deleted_job_postings = get_deleted_job_listings()[:10]  # Fetch top 10 deleted job postings
-flagged_reviews = get_flagged_reviews()[:10]  # Fetch top 10 flagged reviews
-deleted_reviews = get_deleted_reviews()[:10]  # Fetch top 10 deleted reviews
+companies = get_all_companies()[:10]
+job_postings = get_all_job_listings()[:10]
+deleted_job_postings = get_deleted_job_listings()[:10]
+flagged_reviews = get_flagged_reviews()[:10]
+deleted_reviews = get_deleted_reviews()[:10]
 
-# Create columns for cards
-cols = st.columns(5, gap="large")
+# Create Rows for Cards
+row1_cols = st.columns(3, gap="large")  # First row with 3 cards
+row2_cols = st.columns(2, gap="large")  # Second row with 2 cards
 
-# Section: View All Companies
-with cols[0]:
+# Row 1: Companies, Active Job Postings, Deleted Job Postings
+with row1_cols[0]:
     st.markdown(
         """
         <div class="card">
@@ -58,8 +59,6 @@ with cols[0]:
     )
     if st.button("View all Companies", use_container_width=True):
         st.switch_page("pages/Companies_Page.py")
-
-    # Preview for Companies
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{c.get('Name', 'N/A')} - {c.get('Headline', 'No Headline')}</li>" for c in companies]) +
@@ -67,8 +66,7 @@ with cols[0]:
         unsafe_allow_html=True
     )
 
-# Section: View All Job Postings
-with cols[1]:
+with row1_cols[1]:
     st.markdown(
         """
         <div class="card">
@@ -79,14 +77,7 @@ with cols[1]:
         unsafe_allow_html=True
     )
     if st.button("View all Job Postings", use_container_width=True):
-        st.session_state['my_job_postings'] = False
-        st.session_state['show_deleted'] = False
-        st.session_state['show_flagged'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
-
-    # Preview for Job Postings
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in job_postings]) +
@@ -94,8 +85,7 @@ with cols[1]:
         unsafe_allow_html=True
     )
 
-# Section: View All Deleted Job Postings
-with cols[2]:
+with row1_cols[2]:
     st.markdown(
         """
         <div class="card">
@@ -106,14 +96,7 @@ with cols[2]:
         unsafe_allow_html=True
     )
     if st.button("View all Deleted Job Postings", use_container_width=True):
-        st.session_state['my_job_postings'] = False
-        st.session_state['show_deleted'] = True
-        st.session_state['show_flagged'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
-
-    # Preview for Deleted Job Postings
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{djp.get('Job Title', 'N/A')} - {djp.get('Company', 'N/A')}</li>" for djp in deleted_job_postings]) +
@@ -121,8 +104,8 @@ with cols[2]:
         unsafe_allow_html=True
     )
 
-# Section: View All Flagged Reviews
-with cols[3]:
+# Row 2: Flagged Reviews, Deleted Reviews
+with row2_cols[0]:
     st.markdown(
         """
         <div class="card">
@@ -133,13 +116,7 @@ with cols[3]:
         unsafe_allow_html=True
     )
     if st.button("View all Flagged Reviews", use_container_width=True):
-        st.session_state['show_flagged'] = True
-        st.session_state['show_deleted'] = False
-        st.session_state['job_listing_id'] = False
-        st.session_state['show_my_flagged'] = False
         st.switch_page("pages/Reviews_Page.py")
-
-    # Preview for Flagged Reviews
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{fr.get('Description', 'N/A')} - Reason: {fr.get('Reason', 'No Reason')}</li>" for fr in flagged_reviews]) +
@@ -147,8 +124,7 @@ with cols[3]:
         unsafe_allow_html=True
     )
 
-# Section: View All Deleted Reviews
-with cols[4]:
+with row2_cols[1]:
     st.markdown(
         """
         <div class="card">
@@ -159,12 +135,7 @@ with cols[4]:
         unsafe_allow_html=True
     )
     if st.button("View all Deleted Reviews", use_container_width=True):
-        st.session_state['show_flagged'] = False
-        st.session_state['show_deleted'] = True
-        st.session_state['job_listing_id'] = False
         st.switch_page("pages/Reviews_Page.py")
-
-    # Preview for Deleted Reviews
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{dr.get('Description', 'N/A')} - Satisfaction: {dr.get('Job Satisfaction', 'N/A')}</li>" for dr in deleted_reviews]) +
