@@ -42,3 +42,15 @@ h1::after {
     background-color: #ffffff !important;
     margin: 10px auto 20px;
 }
+
+h2 {
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #ffffff;
+    width: 80%;
+    padding-bottom: 5px;
+}
+
+/* Subheading and General Text Styling */
+h2, h3, h4, p, label {
+    color: #ffffff !important; /* Ensure all headings and general text are white */
+}
