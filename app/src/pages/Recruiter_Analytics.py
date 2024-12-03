@@ -12,6 +12,9 @@ st.set_page_config(
     page_icon="📊"
 )
 
+# Apply custom CSS for consistent dark mode theme
+load_css("./styles/recruiter_analytics_styles.css")
+
 # Retrieve Recruiter ID
 recruiter_id = st.session_state.get('recruiter_id', None)
 
@@ -24,9 +27,8 @@ except:
 SideBarLinks()
 
 # Page Content
-st.title("Recruiter Analytics")
+st.title("Here are your Job Posting Analytics!")
 if recruiter_id:
-    st.write(f"Analytics for Recruiter ID: {recruiter_id}")
 
     # Fetch Analytics Data
     try:

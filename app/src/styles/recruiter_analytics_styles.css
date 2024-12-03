@@ -1,0 +1,119 @@
+/* Remove the persistent white header */
+[data-testid="stHeader"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+}
+
+/* Set background color for the page */
+body {
+    background-color: #000000 !important;
+    color: #ffffff !important; /* Set all text to white */
+}
+
+/* Main app background */
+.stApp {
+    background-color: #000000 !important;
+}
+
+/* Sidebar Styling */
+.css-1d391kg {
+    background-color: #1a1a1a !important;
+    border-right: 1px solid #333333 !important;
+}
+
+/* Page Title Styling */
+h1 {
+    text-align: center !important;
+    font-weight: 600 !important;
+    padding: 10px 0 !important;
+    margin-top: -10px !important;
+    margin-bottom: 20px !important;
+    background-color: #1a1a1a !important;
+    border-radius: 10px !important;
+    color:#ffffff !important;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 80%; /* Make the underline longer */
+    height: 2px !important;
+    background-color: #ffffff !important;
+    margin: 10px auto 20px;
+}
+
+/* Subheading and General Text Styling */
+h2, h3, h4, p, label {
+    color: #ffffff !important; /* Ensure all headings and general text are white */
+}
+
+/* Search Bar Styling */
+textarea, input[type="text"] {
+    background-color: #ffffff !important;
+    color: #000000 !important; /* Black text for better input readability */
+    border: 1px solid #cccccc !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+}
+
+textarea::placeholder, input[type="text"]::placeholder {
+    color: #666666 !important;
+}
+
+/* Student Card Styling */
+[data-testid="stExpander"] {
+    border: 1px solid #cccccc !important;
+    border-radius: 10px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    background-color: #1a1a1a !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
+    color: #ffffff !important; /* Ensure text inside cards is white */
+}
+
+/* Alternate Background Colors for Cards */
+[data-testid="stExpander"]:nth-child(odd) {
+    background-color: #252525 !important;
+}
+
+[data-testid="stExpander"]:nth-child(even) {
+    background-color: #1a1a1a !important;
+}
+
+/* Hover Effects for Cards */
+[data-testid="stExpander"]:hover {
+    background-color: #333333 !important;
+}
+
+/* Button Styling */
+div.stButton > button {
+    background-color: #0047AB !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+div.stButton > button:hover {
+    transform: scale(1.05) !important;
+    background-color: #003366 !important;
+}
+
+/* Markdown and Content Styling */
+.stMarkdown, .stMarkdown div, .stMarkdown span {
+    color: #ffffff !important; /* Ensure Markdown content is white */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem !important;
+    }
+
+    [data-testid="stExpander"] {
+        padding: 10px !important;
+        margin-bottom: 10px !important;
+    }
+}
