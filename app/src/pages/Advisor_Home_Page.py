@@ -46,8 +46,35 @@ sent_job_postings = get_sent_job_listings(advisor_id)[:3]
 st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
 cols_top = st.columns(2, gap="large")
 
-# Section: My Students Reviews
+# Section: View All Job Postings (Top Left)
 with cols_top[0]:
+    st.markdown(
+        """
+        <div class="card">
+            <h3>View All Job Postings</h3>
+            <p>Browse through all available job postings.</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    if st.button("View All Job Postings", use_container_width=True):
+        st.session_state['company_id'] = False
+        st.session_state['my_job_postings'] = False
+        st.session_state['show_deleted'] = False
+        st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
+        st.switch_page("pages/Job_Listings_Page.py")
+
+    # Preview for All Job Postings
+    st.markdown(
+        "<div class='preview'><h4>Preview:</h4><ul>" +
+        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in job_postings]) +
+        "</ul></div>",
+        unsafe_allow_html=True
+    )
+
+# Section: My Students Reviews (Top Right)
+with cols_top[1]:
     st.markdown(
         """
         <div class="card">
@@ -66,32 +93,12 @@ with cols_top[0]:
         unsafe_allow_html=True
     )
 
-# Section: My Students Analytics
-with cols_top[1]:
-    st.markdown(
-        """
-        <div class="card">
-            <h3>View My Students Analytics</h3>
-            <p>Analyze the performance and engagement of your students.</p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("View My Students Analytics", use_container_width=True):
-        st.switch_page("pages/Advisor_Analytics.py")
-    st.markdown(
-        "<div class='preview'><h4>Preview:</h4><ul>" +
-        "".join([f"<li>{s.get('StudentName', 'N/A')} - Email: {s.get('StudentEmail', 'N/A')}</li>" for s in students]) +
-        "</ul></div>",
-        unsafe_allow_html=True
-    )
-
 # Bottom Row: Two Features
 st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
 st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
 cols_bottom = st.columns(2, gap="large")
 
-# Section: Sent Job Listings
+# Section: Sent Job Listings (Bottom Left)
 with cols_bottom[0]:
     st.markdown(
         """
@@ -117,29 +124,22 @@ with cols_bottom[0]:
         unsafe_allow_html=True
     )
 
-# Section: View All Job Postings
+# Section: My Students Analytics (Bottom Right)
 with cols_bottom[1]:
     st.markdown(
         """
         <div class="card">
-            <h3>View All Job Postings</h3>
-            <p>Browse through all available job postings.</p>
+            <h3>View My Students Analytics</h3>
+            <p>Analyze the performance and engagement of your students.</p>
         </div>
         """,
         unsafe_allow_html=True
     )
-    if st.button("View All Job Postings", use_container_width=True):
-        st.session_state['company_id'] = False
-        st.session_state['my_job_postings'] = False
-        st.session_state['show_deleted'] = False
-        st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
-        st.switch_page("pages/Job_Listings_Page.py")
-
-    # Preview for All Job Postings
+    if st.button("View My Students Analytics", use_container_width=True):
+        st.switch_page("pages/Advisor_Analytics.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
-        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in job_postings]) +
+        "".join([f"<li>{s.get('StudentName', 'N/A')} - Email: {s.get('StudentEmail', 'N/A')}</li>" for s in students]) +
         "</ul></div>",
         unsafe_allow_html=True
     )
