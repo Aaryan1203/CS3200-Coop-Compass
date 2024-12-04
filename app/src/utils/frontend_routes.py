@@ -136,8 +136,6 @@ def unflag_review(review_id):
 def get_students_for_advisor(advisor_id):
     return fetch_data(f'/s/students/advisor/{advisor_id}')
 
-def get_advisor_analytics(advisor_id):
-    return fetch_data(f'/advisor/{advisor_id}/analytics')
 #----------------- Recruiter Analytics -----------------#
 
 def get_recruiter_analytics(recruiter_id):
