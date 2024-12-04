@@ -81,6 +81,8 @@ with row1_cols[1]:
     )
     if st.button("View all Job Postings", use_container_width=True):
         st.session_state["show_deleted"] = False
+        st.session_state['my_job_postings'] = False
+        st.session_state['show_sent_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
