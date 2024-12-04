@@ -1,0 +1,172 @@
+/* General Page Styling */
+body {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+.stApp {
+    background-color: #000000 !important;
+}
+
+/* Sidebar Styling */
+.css-1d391kg {
+    background-color: #1a1a1a !important;
+    border-right: 1px solid #333333 !important;
+}
+
+/* Title and Headings */
+h1, h2, h3 {
+    color: #ffffff !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+}
+
+h1 {
+    font-size: 2rem !important;
+    margin-top: 0 !important;
+    padding: 10px 0 !important;
+    background-color: #1a1a1a !important;
+    border-radius: 10px !important;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 60%;
+    height: 2px;
+    margin: 10px auto;
+    background-color: #ffffff;
+}
+
+/* Analytics Overview Container */
+.student-info {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 5px;
+    color: #ffffff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.student-info:hover {
+    background-color: #252525;
+}
+
+.analytics {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Metric Cards */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.metric-container {
+    flex: 1;
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.metric-container:hover {
+    transform: scale(1.03);
+    background-color: #252525;
+}
+
+.metric-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.metric-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Error Messages */
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Visualization Container */
+.visualization-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.visualization-container h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.visualization-container canvas {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Pie Chart Styling */
+.pie-chart-container {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.pie-chart-container canvas {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #00cc66;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 204, 102, 0.3);
+}
+
+/* Dropdowns and Inputs */
+.css-1cpxqw2, .css-1n543e5, .css-2hb19z {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .visualization-container {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .metric-container {
+        margin: 5px 0;
+    }
+
+    h1 {
+        font-size: 1.8rem !important;
+    }
+}

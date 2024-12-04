@@ -21,7 +21,7 @@ st.set_page_config(
 )
 
 # Apply custom CSS for consistent dark mode theme
-#load_css("./styles/advisor_analytics_styles.css")
+load_css("./styles/advisor_analytics_styles.css")
 
 # Retrieve Advisor ID from session state
 advisor_id = st.session_state.get('advisor_id', None)
