@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS `recruiter`;
 DROP TABLE IF EXISTS `admin`;
 DROP TABLE IF EXISTS `student`;
 DROP TABLE IF EXISTS `advisor`;
+DROP TABLE IF EXISTS `deletedJobListings`;
+
 
 CREATE TABLE IF NOT EXISTS `admin`
 (
@@ -126,6 +128,35 @@ CREATE TABLE IF NOT EXISTS `sentJobListings`
     `advisorId`        VARCHAR(255) NOT NULL REFERENCES `advisor` (`advisorId`),
     PRIMARY KEY (`jobListingId`, `studentId`, `advisorId`)
 );
+
+CREATE TABLE IF NOT EXISTS `deletedJobListings`
+(
+    `jobListingId` VARCHAR(255) NOT NULL REFERENCES `jobListing` (`jobListingId`),
+    `deletedById`  VARCHAR(255) NOT NULL REFERENCES `admin` (`adminId`),
+    `reason`       TEXT         NOT NULL,
+    `dateDeleted`  TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
+    PRIMARY KEY (`jobListingId`, `deletedById`)
+);
+
+CREATE TABLE IF NOT EXISTS `deletedReviews`
+(
+    `reviewId`    VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
+    `deletedById` VARCHAR(255) NOT NULL REFERENCES `admin` (`adminId`),
+    `reason`      TEXT         NOT NULL,
+    `dateDeleted` TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
+    PRIMARY KEY (`reviewId`, `deletedById`)
+);
+
+CREATE TABLE IF NOT EXISTS `flaggedReviewByRecruiter`
+(
+    `reviewId`        VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
+    `flaggedById`     VARCHAR(255) NOT NULL REFERENCES `recruiter` (`recruiterId`),
+    `reason`          TEXT         NOT NULL,
+    `dateFlagged`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
+    PRIMARY KEY (`reviewId`, `flaggedById`)
+);
+
+
 
 insert into `admin` (`adminId`, `name`, `email`, `phoneNumber`) values 
 ('1', 'Sam', 'lmizzi0@senate.gov', 5628527288),
@@ -406,22 +437,33 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 ('review_100', 'job_40', '130', False, 'Pay was below industry standard, but good learning opportunities.', 1, 36, False, '2024-11-25T05:23:24.599728');
 
 
--- INSERT IGNORE INTO `reviewResource` (`resourceId`, `reviewId`)
--- VALUES ('R1', 'Rev1'),
---        ('R2', 'Rev2'),
---        ('R3', 'Rev3');
+INSERT IGNORE INTO `reviewResource` (`resourceId`, `reviewId`)
+VALUES ('R1', 'Rev1'),
+        ('R2', 'Rev2'),
+        ('R3', 'Rev3');
 
 INSERT INTO `favoriteJobListings` (`studentId`, `jobListingId`)
 VALUES ('100', 'job_1'),
        ('100', 'job_2'),
        ('100', 'job_3');
 
--- INSERT IGNORE INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
--- VALUES ('Rev1', 'Rcrt1', 'Inappropriate language', '2024-05-15'),
---        ('Rev2', 'Rcrt2', 'Misleading content', '2024-06-15'),
---        ('Rev3', 'Rcrt3', 'False information', '2024-07-15');
+INSERT INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
+VALUES ('review_14', '0', 'Inappropriate language', '2024-05-15'),
+        ('review_20', '0', 'Misleading content', '2024-06-15'),
+        ('review_21', '0', 'False information', '2024-07-15');
 
 INSERT INTO `sentJobListings` (`jobListingId`, `studentId`, `advisorId`)
 VALUES ('job_1', '100', '1'),
         ('job_2', '111', '1'),
         ('job_3', '121', '1');
+
+INSERT INTO `deletedJobListings` (`jobListingId`, `deletedBy`, `dateDeleted`)
+VALUES ('job_8', '1', '2024-05-15'),
+        ('job_10', '1', '2024-06-15'),
+        ('job_12', '1', '2024-07-15');
+
+INSERT INTO `deletedReview` (`reviewId`, `deletedBy`, `dateDeleted`)
+VALUES ('review_1', '1', '2024-05-15'),
+        ('review_2', '1', '2024-06-15'),
+        ('review_3', '1', '2024-07-15');
+
