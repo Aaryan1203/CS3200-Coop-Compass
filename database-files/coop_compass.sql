@@ -129,35 +129,6 @@ CREATE TABLE IF NOT EXISTS `sentJobListings`
     PRIMARY KEY (`jobListingId`, `studentId`, `advisorId`)
 );
 
-CREATE TABLE IF NOT EXISTS `deletedJobListings`
-(
-    `jobListingId` VARCHAR(255) NOT NULL REFERENCES `jobListing` (`jobListingId`),
-    `deletedById`  VARCHAR(255) NOT NULL REFERENCES `admin` (`adminId`),
-    `reason`       TEXT         NOT NULL,
-    `dateDeleted`  TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
-    PRIMARY KEY (`jobListingId`, `deletedById`)
-);
-
-CREATE TABLE IF NOT EXISTS `deletedReviews`
-(
-    `reviewId`    VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
-    `deletedById` VARCHAR(255) NOT NULL REFERENCES `admin` (`adminId`),
-    `reason`      TEXT         NOT NULL,
-    `dateDeleted` TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
-    PRIMARY KEY (`reviewId`, `deletedById`)
-);
-
-CREATE TABLE IF NOT EXISTS `flaggedReviewByRecruiter`
-(
-    `reviewId`        VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
-    `flaggedById`     VARCHAR(255) NOT NULL REFERENCES `recruiter` (`recruiterId`),
-    `reason`          TEXT         NOT NULL,
-    `dateFlagged`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP    NOT NULL,
-    PRIMARY KEY (`reviewId`, `flaggedById`)
-);
-
-
-
 insert into `admin` (`adminId`, `name`, `email`, `phoneNumber`) values 
 ('1', 'Sam', 'lmizzi0@senate.gov', 5628527288),
 ('2', 'Jorie', 'jyuryichev1@amazon.co.jp', 1039806271),
@@ -287,17 +258,17 @@ insert into `jobListing` (`jobListingId`, `recruiterId`, `companyId`, `jobTitle`
 ('job_2', '4', '5', 'Marketing Manager', 'Marketing Manager role at Divanoodle, focusing on Supply Chain Management.', '2024-11-25', '2025-06-26', 28, 'Python, SQL, Tableau', 'San Francisco, CA', False, '2024-11-25T05:17:41.949003'),
 ('job_3', '0', '8', 'Graphic Designer', 'Graphic Designer role at Twitterwire, focusing on Recruitment.', '2024-11-25', '2025-11-25', 30, 'Supply Chain Management', 'Los Angeles, CA', False, '2024-11-25T05:17:41.949020'),
 ('job_4', '8', '20', 'Financial Analyst', 'Financial Analyst role at Thoughtblab, focusing on Financial Modeling.', '2024-11-25', '2025-03-24', 35, 'Customer Relationship Management', 'Miami, FL', False, '2024-11-25T05:17:41.949037'),
-('job_5', '4', '16', 'Data Analyst', 'Data Analyst role at Yodoo, focusing on Recruitment.', '2024-11-25', '2025-06-11', 44, 'Python, SQL, Tableau', 'Miami, FL', False, '2024-11-25T05:17:41.949047'),
-('job_6', '5', '11', 'Software Engineer', 'Software Engineer role at Skivee, focusing on Customer Relationship Management.', '2024-11-25', '2025-04-16', 49, 'Marketing Strategies, SEO', 'Boston, MA', False, '2024-11-25T05:17:41.949056'),
+('job_5', '4', '16', 'Data Analyst', 'Data Analyst role at Yodoo, focusing on Recruitment.', '2024-11-25', '2025-06-11', 44, 'Python, SQL, Tableau', 'Miami, FL', True, '2024-11-25T05:17:41.949047'),
+('job_6', '5', '11', 'Software Engineer', 'Software Engineer role at Skivee, focusing on Customer Relationship Management.', '2024-11-25', '2025-04-16', 49, 'Marketing Strategies, SEO', 'Boston, MA', True, '2024-11-25T05:17:41.949056'),
 ('job_7', '6', '12', 'Operations Manager', 'Operations Manager role at Divape, focusing on Supply Chain Management.', '2024-11-25', '2025-08-11', 29, 'Project Management, Agile', 'Chicago, IL', False, '2024-11-25T05:17:41.949065'),
 ('job_8', '7', '5', 'Graphic Designer', 'Graphic Designer role at Divanoodle, focusing on Adobe Photoshop.', '2024-11-25', '2025-10-08', 42, 'Customer Relationship Management', 'Denver, CO', False, '2024-11-25T05:17:41.949078'),
 ('job_9', '6', '4', 'Project Coordinator', 'Project Coordinator role at Realcube, focusing on Supply Chain Management.', '2024-11-25', '2025-11-15', 39, 'Project Management, Agile', 'Boston, MA', False, '2024-11-25T05:17:41.949088'),
 ('job_10', '3', '19', 'Financial Analyst', 'Financial Analyst role at Edgeclub, focusing on Supply Chain Management.', '2024-11-25', '2025-06-19', 36, 'Financial Modeling, Excel', 'Los Angeles, CA', False, '2024-11-25T05:17:41.949097'),
-('job_11', '6', '6', 'Data Analyst', 'Data Analyst role at Tazzy, focusing on Marketing Strategies.', '2024-11-25', '2025-08-05', 27, 'Financial Modeling, Excel', 'Austin, TX', False, '2024-11-25T05:17:41.949106'),
+('job_11', '6', '6', 'Data Analyst', 'Data Analyst role at Tazzy, focusing on Marketing Strategies.', '2024-11-25', '2025-08-05', 27, 'Financial Modeling, Excel', 'Austin, TX', True, '2024-11-25T05:17:41.949106'),
 ('job_12', '8', '14', 'HR Specialist', 'HR Specialist role at Realfire, focusing on Python.', '2024-11-25', '2025-09-30', 25, 'Recruitment, Payroll', 'Miami, FL', False, '2024-11-25T05:17:41.949115'),
 ('job_13', '8', '16', 'Project Coordinator', 'Project Coordinator role at Yodoo, focusing on Adobe Photoshop.', '2024-11-25', '2025-09-21', 40, 'Marketing Strategies, SEO', 'Seattle, WA', False, '2024-11-25T05:17:41.949124'),
 ('job_14', '8', '13', 'Data Analyst', 'Data Analyst role at Ainyx, focusing on Project Management.', '2024-11-25', '2025-10-04', 48, 'Adobe Photoshop, Illustrator', 'New York, NY', False, '2024-11-25T05:17:41.949132'),
-('job_15', '1', '2', 'Sales Executive', 'Sales Executive role at Cogilith, focusing on UI/UX Design.', '2024-11-25', '2025-03-08', 37, 'Recruitment, Payroll', 'Seattle, WA', False, '2024-11-25T05:17:41.949141'),
+('job_15', '1', '2', 'Sales Executive', 'Sales Executive role at Cogilith, focusing on UI/UX Design.', '2024-11-25', '2025-03-08', 37, 'Recruitment, Payroll', 'Seattle, WA', True, '2024-11-25T05:17:41.949141'),
 ('job_16', '8', '17', 'Software Engineer', 'Software Engineer role at Buzzdog, focusing on Marketing Strategies.', '2024-11-25', '2025-05-26', 15, 'Adobe Photoshop, Illustrator', 'Austin, TX', False, '2024-11-25T05:17:41.949150'),
 ('job_17', '2', '20', 'Sales Executive', 'Sales Executive role at Thoughtblab, focusing on Recruitment.', '2024-11-25', '2025-09-23', 29, 'Recruitment, Payroll', 'Chicago, IL', False, '2024-11-25T05:17:41.949158'),
 ('job_18', '5', '17', 'Sales Executive', 'Sales Executive role at Buzzdog, focusing on Financial Modeling.', '2024-11-25', '2025-10-27', 16, 'UI/UX Design, Figma', 'Los Angeles, CA', False, '2024-11-25T05:17:41.949174'),
@@ -335,10 +306,10 @@ insert into `jobListing` (`jobListingId`, `recruiterId`, `companyId`, `jobTitle`
 ('job_50', '2', '2', 'Data Analyst', 'Data Analyst role at Cogilith, focusing on Customer Relationship Management.', '2024-11-25', '2025-03-08', 17, 'Python, SQL, Tableau', 'San Francisco, CA', False, '2024-11-25T05:17:41.949531');
 
 insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `description`, `jobSatisfaction`, `hourlyWage`, `deleted`, `datePosted`) values 
-('review_1', 'job_31', '101', False, 'The tasks were repetitive, but pay was decent.', 1, 27, False, '2024-11-25T05:23:24.598294'),
-('review_2', 'job_24', '125', True, 'Supportive team and good work-life balance.', 5, 27, False, '2024-11-25T05:23:24.598308'),
-('review_3', 'job_11', '112', False, 'Pay was below industry standard, but good learning opportunities.', 1, 28, False, '2024-11-25T05:23:24.598314'),
-('review_4', 'job_13', '126', True, 'Loved the companys culture and the projects.', 4, 22, False, '2024-11-25T05:23:24.598320'),
+('review_1', 'job_31', '100', False, 'The tasks were repetitive, but pay was decent.', 1, 27, False, '2024-11-25T05:23:24.598294'),
+('review_2', 'job_24', '100', True, 'Supportive team and good work-life balance.', 5, 27, True, '2024-11-25T05:23:24.598308'),
+('review_3', 'job_11', '100', False, 'Pay was below industry standard, but good learning opportunities.', 1, 28, False, '2024-11-25T05:23:24.598314'),
+('review_4', 'job_13', '100', True, 'Loved the companys culture and the projects.', 4, 22, True, '2024-11-25T05:23:24.598320'),
 ('review_5', 'job_11', '130', True, 'Supportive team and good work-life balance.', 5, 40, False, '2024-11-25T05:23:24.598326'),
 ('review_6', 'job_26', '101', False, 'The tasks were repetitive, but pay was decent.', 1, 44, False, '2024-11-25T05:23:24.598332'),
 ('review_7', 'job_15', '103', False, 'The tasks were repetitive, but pay was decent.', 2, 21, False, '2024-11-25T05:23:24.598337'),
@@ -351,7 +322,7 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 ('review_14', 'job_48', '117', False, 'Challenging but rewarding job.', 4, 50, False, '2024-11-25T05:23:24.598383'),
 ('review_15', 'job_11', '113', True, 'Flexible work hours and a good mentor.', 4, 38, False, '2024-11-25T05:23:24.598389'),
 ('review_16', 'job_18', '103', True, 'Loved the companys culture and the projects.', 1, 28, False, '2024-11-25T05:23:24.598394'),
-('review_17', 'job_38', '108', True, 'Loved the companys culture and the projects.', 1, 31, False, '2024-11-25T05:23:24.598399'),
+('review_17', 'job_38', '108', True, 'Loved the companys culture and the projects.', 1, 31, True, '2024-11-25T05:23:24.598399'),
 ('review_18', 'job_17', '129', False, 'Great experience, learned a lot!', 5, 29, False, '2024-11-25T05:23:24.598413'),
 ('review_19', 'job_27', '129', False, 'The tasks were repetitive, but pay was decent.', 5, 43, False, '2024-11-25T05:23:24.598419'),
 ('review_20', 'job_8', '112', True, 'Tough environment but great for skill development.', 1, 32, False, '2024-11-25T05:23:24.598424'),
@@ -361,7 +332,7 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 ('review_24', 'job_8', '127', False, 'Flexible work hours and a good mentor.', 2, 32, False, '2024-11-25T05:23:24.598454'),
 ('review_25', 'job_14', '123', True, 'Tough environment but great for skill development.', 5, 34, False, '2024-11-25T05:23:24.598463'),
 ('review_26', 'job_9', '111', False, 'Tough environment but great for skill development.', 1, 33, False, '2024-11-25T05:23:24.598473'),
-('review_27', 'job_18', '130', True, 'Tough environment but great for skill development.', 5, 40, False, '2024-11-25T05:23:24.598494'),
+('review_27', 'job_18', '130', True, 'Tough environment but great for skill development.', 5, 40, True, '2024-11-25T05:23:24.598494'),
 ('review_28', 'job_27', '108', False, 'Great experience, learned a lot!', 1, 30, False, '2024-11-25T05:23:24.598504'),
 ('review_29', 'job_43', '101', True, 'Tough environment but great for skill development.', 4, 15, False, '2024-11-25T05:23:24.598513'),
 ('review_30', 'job_5', '101', False, 'The tasks were repetitive, but pay was decent.', 3, 31, False, '2024-11-25T05:23:24.598524'),
@@ -436,34 +407,16 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 ('review_99', 'job_3', '116', False, 'Pay was below industry standard, but good learning opportunities.', 5, 27, False, '2024-11-25T05:23:24.599717'),
 ('review_100', 'job_40', '130', False, 'Pay was below industry standard, but good learning opportunities.', 1, 36, False, '2024-11-25T05:23:24.599728');
 
-
-INSERT IGNORE INTO `reviewResource` (`resourceId`, `reviewId`)
-VALUES ('R1', 'Rev1'),
-        ('R2', 'Rev2'),
-        ('R3', 'Rev3');
-
 INSERT INTO `favoriteJobListings` (`studentId`, `jobListingId`)
 VALUES ('100', 'job_1'),
        ('100', 'job_2'),
        ('100', 'job_3');
 
-INSERT INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
-VALUES ('review_14', '0', 'Inappropriate language', '2024-05-15'),
-        ('review_20', '0', 'Misleading content', '2024-06-15'),
-        ('review_21', '0', 'False information', '2024-07-15');
-
 INSERT INTO `sentJobListings` (`jobListingId`, `studentId`, `advisorId`)
 VALUES ('job_1', '100', '1'),
-        ('job_2', '111', '1'),
-        ('job_3', '121', '1');
+        ('job_2', '100', '1'),
+        ('job_3', '100', '1');
 
-INSERT INTO `deletedJobListings` (`jobListingId`, `deletedBy`, `dateDeleted`)
-VALUES ('job_8', '1', '2024-05-15'),
-        ('job_10', '1', '2024-06-15'),
-        ('job_12', '1', '2024-07-15');
-
-INSERT INTO `deletedReview` (`reviewId`, `deletedBy`, `dateDeleted`)
-VALUES ('review_1', '1', '2024-05-15'),
-        ('review_2', '1', '2024-06-15'),
-        ('review_3', '1', '2024-07-15');
-
+INSERT INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
+VALUES ('review_4', '0', 'Inappropriate language', '2024-11-25T05:23:24.599768'),
+       ('review_5', '0', 'Inappropriate language', '2024-11-25T05:23:24.599778');
