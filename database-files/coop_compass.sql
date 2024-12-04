@@ -409,8 +409,7 @@ insert into `review` (`reviewId`, `jobListingId`, `studentId`, `anonymous`, `des
 
 INSERT INTO `favoriteJobListings` (`studentId`, `jobListingId`)
 VALUES ('100', 'job_1'),
-       ('100', 'job_2'),
-       ('100', 'job_3');
+       ('100', 'job_2');
 
 INSERT INTO `sentJobListings` (`jobListingId`, `studentId`, `advisorId`)
 VALUES ('job_1', '100', '1'),

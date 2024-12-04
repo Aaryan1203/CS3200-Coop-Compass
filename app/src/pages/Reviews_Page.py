@@ -63,7 +63,7 @@ elif show_my_flagged:
 else:
     st.markdown('<h2 class="main-header">My Reviews</h2>', unsafe_allow_html=True)
 
-if student_id:
+if student_id and job_listing_id:
     if st.button("Write a review"):
         st.session_state["create_modal"] = True
 
