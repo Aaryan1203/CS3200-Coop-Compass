@@ -45,13 +45,21 @@ h1::after {
     margin: 10px auto 20px;
 }
 
-/* Search Bar Styling */
-textarea, input[type="text"] {
+/* Search Bar and Text Input  Styling */
+textarea, input[type="text"], input[type="number"], input[type="date"] {
     background-color: #ffffff !important;
-    color: #fff !important; /* Black text for better input readability */
+    color: #1a1a1a !important; /* Black text for better input readability */
     border: 1px solid #cccccc !important;
     border-radius: 8px !important;
     padding: 10px !important;
+}
+
+/* Change color and style of labels above input boxes */
+div.stTextInput > label, div.stTextArea > label, div.stNumberInput > label, div.stDateInput > label, div.stSelectbox > label {
+    color: #ffffff !important; /* Set the label text color */
+    font-size: 1.2rem !important; /* Adjust font size */
+    font-weight: bold !important; /* Make the text bold */
+    margin-bottom: 0.5rem !important; /* Add space below the label */
 }
 
 /* Add light grey outline for ALL container sections */
