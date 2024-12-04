@@ -46,7 +46,7 @@ def SideBarLinks():
 
     load_css("./styles/nav_styles.css")
 
-    st.sidebar.image("assets/Coop Compass.png", width=300)
+    st.sidebar.image("assets/Coop Compass Logo.png", width=300)
 
     # If there is no logged-in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
