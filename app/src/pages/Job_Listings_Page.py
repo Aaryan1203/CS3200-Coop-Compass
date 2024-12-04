@@ -120,7 +120,7 @@ if isinstance(job_listings, list):
         
         # Display other job listings
         if other_jobs:
-            st.write("## Other Job Listings")
+            st.write(f'## {"Other" if favorite_jobs else ""} Job Listings')
             for job in other_jobs:
                 num_reviews = len([review for review in reviews if review['Job Listing ID'] == job['Job Listing ID']])
                 job_listing_component(job, num_reviews, student_id, advisor_id, my_job_postings=my_job_postings, is_favorite=False, show_sent_jobs=show_sent_jobs)

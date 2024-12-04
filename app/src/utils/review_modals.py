@@ -122,12 +122,12 @@ def edit_review_modal(review, edit_modal_key):
 # Delete Review Modal
 def delete_review_modal(review, delete_modal_key):
     st.markdown('<div class="modal-overlay"><div class="modal">', unsafe_allow_html=True)
-    st.write("### Are you sure you want to delete this review?")
+    st.write("### Are you sure you want to delete this review?") if not review['Deleted'] else st.write("### Are you sure you want to restore this review?")
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Confirm ✅", key=f"confirm_delete_{review['Review ID']}"):
             toggle_delete_review(review['Review ID'])
-            st.success(f"Review for {review['Job Title']} deleted successfully!")
+            st.success(f"Review for {review['Job Title']} updated successfully!")
             st.session_state[delete_modal_key] = False
     with col2:
         if st.button("Cancel ❌", key=f"cancel_delete_{review['Review ID']}"):

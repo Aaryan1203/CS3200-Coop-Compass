@@ -79,7 +79,8 @@ with cols_top[1]:
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_sent_jobs'] = False
-        st.session_state['show_received_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
+        st.session_state['recruiter_id'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     st.markdown(
@@ -132,11 +133,12 @@ with cols_bottom[1]:
         unsafe_allow_html=True,
     )
     if st.button("View My Received Listings", use_container_width=True):
-        st.session_state['show_received_jobs'] = True
+        st.session_state['show_recieved_jobs'] = True
         st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_sent_jobs'] = False
+        st.session_state['recruiter_id'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     st.markdown(

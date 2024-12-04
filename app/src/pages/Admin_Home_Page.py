@@ -99,6 +99,9 @@ with row1_cols[2]:
         unsafe_allow_html=True
     )
     if st.button("View all Deleted Job Postings", use_container_width=True):
+        st.session_state["show_deleted"] = True
+        st.session_state["company_id"] = None
+        st.session_state["my_job_postings"] = False
         st.switch_page("pages/Job_Listings_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
@@ -119,6 +122,10 @@ with row2_cols[0]:
         unsafe_allow_html=True
     )
     if st.button("View all Flagged Reviews", use_container_width=True):
+        st.session_state["show_flagged"] = True
+        st.session_state['show_my_flagged'] = False
+        st.session_state['job_listing_id'] = False
+        st.session_state['show_deleted'] = False
         st.switch_page("pages/Reviews_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
@@ -138,6 +145,7 @@ with row2_cols[1]:
         unsafe_allow_html=True
     )
     if st.button("View all Deleted Reviews", use_container_width=True):
+        st.session_state["show_deleted"] = True
         st.switch_page("pages/Reviews_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +

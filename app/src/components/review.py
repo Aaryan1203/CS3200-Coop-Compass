@@ -67,7 +67,7 @@ def review_component(review, recruiter_id=False, student_id=False, my_reviews=Fa
         # If flagged, show the reason
         if is_flagged:
             st.markdown(
-                f"<p class='flagged-review'><strong>Flagged:</strong> {review['Reason']}</p>",
+                f"<p class='flagged-review'><strong>Flagged by {review['Recruiter Name']}:</strong> {review['Reason']}</p>",
                 unsafe_allow_html=True,
             )
 
