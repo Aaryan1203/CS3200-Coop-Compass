@@ -113,6 +113,7 @@ with cols_bottom[0]:
         st.session_state['job_listing_id'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_flagged'] = False
+        st.session_state['show_my_flagged'] = False
         st.switch_page("pages/Reviews_Page.py")
 
     st.markdown(
