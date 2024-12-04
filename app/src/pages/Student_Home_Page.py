@@ -1,8 +1,11 @@
 import streamlit as st
 from modules.nav import SideBarLinks
-from utils.frontend_routes import get_reviews_by_student
-from utils.frontend_routes import get_all_companies
-from utils.frontend_routes import get_all_job_listings, get_received_job_listings
+from utils.frontend_routes import (
+    get_reviews_by_student,
+    get_all_companies,
+    get_all_job_listings,
+    get_received_job_listings,
+)
 from utils.style_utils import load_css
 
 # Set page configuration
@@ -29,17 +32,18 @@ st.markdown(
 )
 
 # Fetch all data
-companies = get_all_companies()[:10]  
-job_postings = get_all_job_listings()[:10]
+companies = get_all_companies()[:2]
+job_postings = get_all_job_listings()[:2]
 student_id = st.session_state.get("student_id", "100")
-all_reviews = get_reviews_by_student(student_id)[:10]
-recieved_job_listings = get_received_job_listings(student_id)[:10]
+all_reviews = get_reviews_by_student(student_id)[:3]
+received_job_listings = get_received_job_listings(student_id)[:3]
 
-# Create a grid layout for the actions
-cols = st.columns(4, gap="large")
+# Top Row: Two features
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+cols_top = st.columns(2, gap="large")
 
-# Companies Section
-with cols[0]:
+# View All Companies
+with cols_top[0]:
     st.markdown(
         """
         <div class="card">
@@ -59,8 +63,8 @@ with cols[0]:
         unsafe_allow_html=True,
     )
 
-# Job Postings Section
-with cols[1]:
+# View All Job Postings
+with cols_top[1]:
     st.markdown(
         """
         <div class="card">
@@ -75,7 +79,7 @@ with cols[1]:
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_sent_jobs'] = False
-        st.session_state['show_recieved_jobs'] = False
+        st.session_state['show_received_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
 
     st.markdown(
@@ -85,8 +89,15 @@ with cols[1]:
         unsafe_allow_html=True,
     )
 
-# Reviews Section
-with cols[2]:
+# Add spacing between rows
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+
+# Bottom Row: Two features
+cols_bottom = st.columns(2, gap="large")
+
+# View My Reviews
+with cols_bottom[0]:
     st.markdown(
         """
         <div class="card">
@@ -97,13 +108,11 @@ with cols[2]:
         unsafe_allow_html=True,
     )
 
-    # Add "View My Reviews" button below
-    if st.button("View My Reviews", use_container_width=True, key="my_reviews_button"):
+    if st.button("View My Reviews", use_container_width=True):
         st.session_state['job_listing_id'] = False
         st.session_state['show_deleted'] = False
         st.switch_page("pages/Reviews_Page.py")
 
-    # Preview section for reviews
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
         "".join([f"<li>{r.get('Description', 'N/A')} - Satisfaction: {r.get('Job Satisfaction', 'N/A')}</li>" for r in all_reviews]) +
@@ -111,27 +120,28 @@ with cols[2]:
         unsafe_allow_html=True,
     )
 
-with cols[3]:
+# View My Received Job Listings
+with cols_bottom[1]:
     st.markdown(
         """
         <div class="card">
-            <h3>View My Recieved Job Listings</h3>
-            <p>See my recieved job listings.</p>
+            <h3>View My Received Job Listings</h3>
+            <p>See my received job listings.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
-    if st.button("View My Recieved listings", use_container_width=True):
-        st.session_state['show_recieved_jobs'] = True
+    if st.button("View My Received Listings", use_container_width=True):
+        st.session_state['show_received_jobs'] = True
         st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
         st.session_state['show_deleted'] = False
         st.session_state['show_sent_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
-    
+
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
-        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in recieved_job_listings]) +
+        "".join([f"<li>{jp.get('Job Title', 'N/A')} - {jp.get('Company', 'N/A')}</li>" for jp in received_job_listings]) +
         "</ul></div>",
         unsafe_allow_html=True,
     )

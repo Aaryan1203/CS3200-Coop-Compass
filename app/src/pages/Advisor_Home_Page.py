@@ -37,16 +37,17 @@ st.markdown(
 
 # Fetching data using helper functions
 advisor_id = 1  # Example advisor ID
-reviews = get_all_reviews()[:10]  # Fetch top 10 reviews
-students = get_students_for_advisor(advisor_id)[:10]  # Fetch top 10 students
-job_postings = get_all_job_listings()[:10]  # Fetch top 10 job postings
-sent_job_postings = get_sent_job_listings(advisor_id)[:10]  # Fetch top 10 sent job postings
+reviews = get_all_reviews()[:2]  # Limit previews to 3
+students = get_students_for_advisor(advisor_id)[:2]
+job_postings = get_all_job_listings()[:3]
+sent_job_postings = get_sent_job_listings(advisor_id)[:3]
 
-# Create columns to align all cards side by side
-cols = st.columns(4, gap="large")
+# Top Row: Two Features
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+cols_top = st.columns(2, gap="large")
 
 # Section: My Students Reviews
-with cols[0]:
+with cols_top[0]:
     st.markdown(
         """
         <div class="card">
@@ -66,7 +67,7 @@ with cols[0]:
     )
 
 # Section: My Students Analytics
-with cols[1]:
+with cols_top[1]:
     st.markdown(
         """
         <div class="card">
@@ -85,8 +86,13 @@ with cols[1]:
         unsafe_allow_html=True
     )
 
+# Bottom Row: Two Features
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+st.markdown('<div class="row-spacing"></div>', unsafe_allow_html=True)
+cols_bottom = st.columns(2, gap="large")
+
 # Section: Sent Job Listings
-with cols[2]:
+with cols_bottom[0]:
     st.markdown(
         """
         <div class="card">
@@ -112,7 +118,7 @@ with cols[2]:
     )
 
 # Section: View All Job Postings
-with cols[3]:
+with cols_bottom[1]:
     st.markdown(
         """
         <div class="card">

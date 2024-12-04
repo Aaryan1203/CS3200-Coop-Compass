@@ -2,20 +2,21 @@
 [data-testid="stHeader"] {
     margin: 0 !important;
     padding: 0 !important;
-    background: none !important;
+    background: none !important; /* Remove unnecessary background */
 }
 
-/* Adjust block container for content */
+/* Adjust block container for spacing */
 .block-container {
-    padding-top: 2rem !important; /* Restore top padding for content */
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-top: 1rem !important; /* Adjust padding for improved height */
+    padding-bottom: 1rem !important; /* Add bottom padding */
+    padding-left: 2rem !important; /* Add left padding */
+    padding-right: 2rem !important; /* Add right padding */
 }
 
 /* Set the entire page background to black */
 body {
     background-color: #000000 !important;
-    color: #e0e0e0 !important;
+    color: #e0e0e0 !important; /* Light gray text for readability */
 }
 
 /* Change the main app container background to black */
@@ -27,72 +28,92 @@ body {
 .hero {
     text-align: center;
     padding: 20px;
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Black background for hero */
     border-radius: 10px;
-    margin-bottom: 20px;
+    /* Increased spacing below hero section */
 }
 
 .hero h1 {
-    color: #0047AB;
+    color: #0047AB; /* Dark blue title */
     font-size: 2.5rem;
 }
 
 .hero h3 {
-    color: #e0e0e0;
+    color: #e0e0e0; /* Light gray subtitle */
     font-size: 1.2rem;
 }
 
 /* Card Styling */
 .card {
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    padding: 20px;
+    background-color: #1a1a1a; /* Dark gray card background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Internal padding */
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Add subtle shadow */
+    margin-bottom: 20px; /* Reduced spacing between rows */
 }
 
 .card h3 {
-    color: #bb86fc;
-    margin-bottom: 10px;
+    color: #bb86fc; /* Purple card title */
+    margin-bottom: 5px; /* Reduced space below card title */
 }
 
 .card p {
-    color: #e0e0e0;
-    margin-bottom: 20px;
+    color: #e0e0e0; /* Light gray text */
+    margin-bottom: 10px; /* Reduced space below card description */
 }
 
 .card:hover {
-    background-color: #333333;
+    background-color: #333333; /* Slightly lighter gray on hover */
 }
 
 /* Button Styling */
 div.stButton > button {
-    background-color: #0047AB !important;
-    color: #ffffff !important;
-    border-radius: 5px;
-    padding: 10px 20px;
+    background-color: #0047AB !important; /* Blue button to match other pages */
+    color: #ffffff !important; /* White text */
+    border-radius: 5px; /* Rounded button edges */
+    padding: 10px 20px; /* Add internal padding */
     border: none;
-    font-size: 1rem;
+    font-size: 1rem; /* Uniform button font size */
+   
 }
 
 div.stButton > button:hover {
-    background-color: #003366 !important;
+    background-color: #003366 !important; /* Darker blue on hover */
 }
 
 /* Preview Box Styling */
 .preview {
-    text-align: left;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    background-color: #1a1a1a;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    text-align: left; /* Align text to the left for readability */
+    color: #e0e0e0; /* Light gray text */
+    font-size: 0.9rem; /* Smaller font for preview */
+    background-color: #1a1a1a; /* Match card background */
+    padding: 10px; /* Internal padding */
+    border-radius: 5px; /* Rounded edges */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 }
 
 .preview h4 {
-    color: #bb86fc;
+    color: #bb86fc; /* Purple heading for preview */
     font-size: 1rem;
+   
+}
+
+/* Adjust column spacing */
+.stColumns {
+    gap: 2rem !important; /* Increase gap between columns */
+}
+
+/* Add extra space between rows */
+.row-spacing {
+    margin-top: 30px !important; /* Add space between rows of features */
+}
+
+/* Improved card layout for smaller screens */
+@media (max-width: 768px) {
+    .stColumns {
+        flex-direction: column !important; /* Stack columns vertically on small screens */
+    }
+
+    
 }
