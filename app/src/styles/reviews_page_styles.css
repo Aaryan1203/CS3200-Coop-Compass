@@ -49,6 +49,15 @@ h1::after {
     margin: 10px auto 20px;
 }
 
+/* Search Bar Styling */
+textarea, input[type="text"] {
+    background-color: #ffffff !important;
+    color: #000000 !important; /* Black text for better input readability */
+    border: 1px solid #cccccc !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+}
+
 /* Add light grey outline for ALL container sections */
 [data-testid="stExpander"] {
     border: 1px solid #cccccc !important;

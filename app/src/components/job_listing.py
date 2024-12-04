@@ -63,7 +63,7 @@ def job_listing_component(job, num_reviews, student_id, advisor_id, my_job_posti
 
                         # Display a dropdown with student names
                         selected_student = st.selectbox(
-                            "Select a student to send this job:" if not show_sent_jobs else "Select a student to unsend this job:",
+                            "",
                             student_names,
                         key=f"student_select_{job['Job Listing ID']}"
                         )
