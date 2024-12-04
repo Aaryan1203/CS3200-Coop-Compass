@@ -36,7 +36,7 @@ load_css("./styles/home_page_styles.css")
 st.markdown(
     """
     <div class="hero">
-        <h1>Welcome to Coop Compass 🎓</h1>
+        <h1>Welcome to Co-op Compass 🎓</h1>
         <p>Your one-stop platform for navigating co-op opportunities!</p>
     </div>
     """,
