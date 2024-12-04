@@ -3,7 +3,7 @@ from flask import Flask
 from backend.db_connection import db
 from backend.job_listings.job_listing_routes import job_listings
 from backend.reviews.reviews_routes import reviews
-from backend.students.student_routes import students
+from backend.management.management_routes import management
 from backend.companies.companies_routes import companies
 
 import os
@@ -44,7 +44,7 @@ def create_app():
     app.register_blueprint(companies,   url_prefix='/c')
     app.register_blueprint(job_listings, url_prefix='/j')
     app.register_blueprint(reviews,     url_prefix='/r')
-    app.register_blueprint(students,       url_prefix='/s')
+    app.register_blueprint(management,       url_prefix='/m')
 
     # Don't forget to return the app object
     return app

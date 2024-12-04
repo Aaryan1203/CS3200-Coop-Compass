@@ -2,8 +2,6 @@ DROP SCHEMA IF EXISTS `coop_compass` ;
 CREATE DATABASE IF NOT EXISTS `coop_compass`;
 USE `coop_compass`;
 
-DROP TABLE IF EXISTS `reviewResource`;
-DROP TABLE IF EXISTS `resource`;
 DROP TABLE IF EXISTS `flaggedReview`;
 DROP TABLE IF EXISTS `review`;
 DROP TABLE IF EXISTS `sentJobListings`;
@@ -60,15 +58,6 @@ CREATE TABLE IF NOT EXISTS `company`
     `websiteLink`    VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS `resource`
-(
-    `resourceId`  VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
-    `studentId`   VARCHAR(255) NOT NULL REFERENCES `student` (`studentId`),
-    `name`        VARCHAR(255) NOT NULL,
-    `description` TEXT,
-    `URL`         VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS `jobListing`
 (
     `jobListingId` VARCHAR(255) PRIMARY KEY DEFAULT (UUID()),
@@ -96,13 +85,6 @@ CREATE TABLE IF NOT EXISTS `review`
     `hourlyWage`      INT,
     `deleted`         BOOLEAN DEFAULT false,
     `datePosted`      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `reviewResource`
-(
-    `resourceId` VARCHAR(255) NOT NULL REFERENCES `resource` (`resourceId`),
-    `reviewId`   VARCHAR(255) NOT NULL REFERENCES `review` (`reviewId`),
-    PRIMARY KEY (`resourceId`, `reviewId`)
 );
 
 CREATE TABLE IF NOT EXISTS `favoriteJobListings`
@@ -220,38 +202,6 @@ insert into `company` (`companyId`, `adminCreatedId`, `name`, `headline`, `descr
 ('18', '8', 'Mydeo', 'Scombroid fish poisoning', 'Scombroid fish poisoning', 'http://linkedin.com'),
 ('19', '9', 'Edgeclub', 'Unsp fx upper end of right ulna, init for opn fx type I/2', 'Unspecified fracture of upper end of right ulna, initial encounter for open fracture type I or II', 'https://ustream.tv'),
 ('20', '10', 'Thoughtblab', 'Myotonic chondrodystrophy', 'Myotonic chondrodystrophy', 'http://deliciousdays.com');
-
-insert into `resource` (`resourceId`, `studentId`, `name`, `description`, `URL`) values
-('R1', '101', 'Introduction to Python', 'A beginner-friendly guide to Python programming.', 'https://example.com/python-intro'),
-('R2', '102', 'Data Structures in Java', 'Comprehensive resource for learning data structures in Java.', 'https://example.com/java-ds'),
-('R3', '103', 'HTML & CSS Basics', 'Learn the fundamentals of web development with HTML and CSS.', 'https://example.com/html-css-basics'),
-('R4', '104', 'SQL for Beginners', 'Guide to understanding SQL queries and databases.', 'https://example.com/sql-guide'),
-('R5', '105', 'React for Frontend Development', 'Learn how to build dynamic web apps with React.', 'https://example.com/react-tutorial'),
-('R6', '106', 'Advanced Excel Skills', 'Master advanced Excel functions and data analysis.', 'https://example.com/excel-advanced'),
-('R7', '107', 'AWS Cloud Basics', 'Introduction to cloud computing with AWS.', 'https://example.com/aws-basics'),
-('R8', '108', 'Cybersecurity Fundamentals', 'Understanding the basics of cybersecurity and threats.', 'https://example.com/cybersecurity-fundamentals'),
-('R9', '109', 'Machine Learning 101', 'Beginner-friendly resource to machine learning concepts.', 'https://example.com/ml-101'),
-('R10', '110', 'Project Management Essentials', 'Learn the basics of effective project management.', 'https://example.com/pm-essentials'),
-('R11', '111', 'Mobile App Development with Flutter', 'Learn to build cross-platform mobile apps with Flutter.', 'https://example.com/flutter-dev'),
-('R12', '112', 'Financial Analysis with R', 'Resource for analyzing financial data using R programming.', 'https://example.com/financial-r'),
-('R13', '113', 'Data Visualization with Tableau', 'Learn how to create impactful visualizations in Tableau.', 'https://example.com/tableau-viz'),
-('R14', '114', 'C++ Programming Basics', 'Getting started with C++ for software development.', 'https://example.com/cpp-basics'),
-('R15', '115', 'Introduction to Robotics', 'Resource on the basics of robotics and automation.', 'https://example.com/robotics-intro'),
-('R16', '116', 'Digital Marketing 101', 'Understand the fundamentals of digital marketing strategies.', 'https://example.com/digital-marketing'),
-('R17', '117', 'Artificial Intelligence Basics', 'An overview of AI concepts and applications.', 'https://example.com/ai-basics'),
-('R18', '118', 'Graphic Design with Canva', 'Learn the basics of graphic design using Canva.', 'https://example.com/canva-guide'),
-('R19', '119', 'Ethical Hacking for Beginners', 'An introduction to ethical hacking and penetration testing.', 'https://example.com/ethical-hacking'),
-('R20', '120', 'Database Design Principles', 'Learn how to design and optimize relational databases.', 'https://example.com/db-design'),
-('R21', '121', 'Statistics for Data Science', 'Foundational statistics concepts for data science.', 'https://example.com/stats-ds'),
-('R22', '122', 'Blockchain Technology Explained', 'Understand the core concepts of blockchain.', 'https://example.com/blockchain-guide'),
-('R23', '123', 'Technical Writing Essentials', 'Learn how to write clear and concise technical documents.', 'https://example.com/tech-writing'),
-('R24', '124', 'Networking Basics', 'Understanding the essentials of computer networking.', 'https://example.com/networking-basics'),
-('R25', '125', 'Time Management Tips', 'Practical tips for effective time management.', 'https://example.com/time-management'),
-('R26', '126', 'Linux Command Line Basics', 'Learn the fundamentals of Linux command-line usage.', 'https://example.com/linux-cli'),
-('R27', '127', 'Building REST APIs with Node.js', 'Resource for developing REST APIs using Node.js.', 'https://example.com/rest-nodejs'),
-('R28', '128', 'Introduction to DevOps', 'Learn the basics of DevOps practices and tools.', 'https://example.com/devops-intro'),
-('R29', '129', 'Power BI for Business Intelligence', 'Get started with Power BI for business data analysis.', 'https://example.com/powerbi'),
-('R30', '130', 'Quantum Computing Basics', 'An introductory guide to quantum computing.', 'https://example.com/quantum-computing');
 
 insert into `jobListing` (`jobListingId`, `recruiterId`, `companyId`, `jobTitle`, `description`, `startDate`, `endDate`, `hourlyWage`, `skills`, `location`, `deleted`, `datePosted`) values 
 ('job_1', '1', '11', 'Marketing Manager', 'Marketing Manager role at Skivee, focusing on Supply Chain Management.', '2024-11-25', '2025-09-03', 43, 'Marketing Strategies, SEO', 'Miami, FL', False, '2024-11-25T05:17:41.948983'),

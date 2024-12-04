@@ -101,28 +101,6 @@ def get_deleted_reviews():
     return response
 
 #------------------------------------------------------------
-# Get all flagged reviews
-#------------------------------------------------------------
-@reviews.route('/reviews/flagged', methods=['GET'])
-def get_flagged_reviews():
-    query = '''
-        SELECT FR.reviewId as 'Review ID', FR.flaggedById as 'Flagged By ID', FR.reason as Reason, R.jobListingId as 'Job Listing ID', R.anonymous as Anonymous, R.description as Description, R.jobSatisfaction as 'Job Satisfaction', R.hourlyWage as 'Hourly Wage', S.name as 'Student Name', J.jobTitle as 'Job Title', C.name as Company, R.deleted as Deleted, J.recruiterId as 'Recruiter ID', S.email as 'Student Email', S.phoneNumber as 'Student Phone Number', RC.name as 'Recruiter Name'
-        FROM flaggedReview FR
-        JOIN review R ON FR.reviewId = R.reviewId
-        JOIN student S ON R.studentId = S.studentId
-        JOIN jobListing J ON R.jobListingId = J.jobListingId
-        JOIN company C ON J.companyId = C.companyId
-        JOIN recruiter RC ON J.recruiterId = RC.recruiterId
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    theData = cursor.fetchall()
-    response = make_response(jsonify(theData))
-    response.status_code = 200
-    return response
-
-#------------------------------------------------------------
 # Add a review
 #------------------------------------------------------------
 @reviews.route('/review', methods=['POST'])
@@ -145,47 +123,6 @@ def add_review():
     db.get_db().commit()
     
     response = make_response(jsonify({"message": "Review added."}))
-    response.status_code = 200
-    return response
-
-#------------------------------------------------------------
-# Toggle flagging a review
-#------------------------------------------------------------
-@reviews.route('/review/flag', methods=['POST'])
-def flag_review():
-    data = request.json
-    reviewId = data['reviewId']
-    flaggedById = data['flaggedById']
-    reason = data['reason']
-    
-    query = f'''
-        INSERT INTO flaggedReview (reviewId, flaggedById, reason)
-        VALUES ('{reviewId}', '{flaggedById}', '{reason}')
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-    
-    response = make_response(jsonify({"message": "Review flagged."}))
-    response.status_code = 200
-    return response
-
-#------------------------------------------------------------
-# Unflag a review
-#------------------------------------------------------------
-@reviews.route('/review/unflag/<reviewId>', methods=['PUT'])
-def unflag_review(reviewId):
-    query = f'''
-        DELETE FROM flaggedReview
-        WHERE reviewId = '{reviewId}'
-    '''
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-    
-    response = make_response(jsonify({"message": "Review unflagged."}))
     response.status_code = 200
     return response
 
