@@ -136,6 +136,11 @@ def unflag_review(review_id):
 def get_students_for_advisor(advisor_id):
     return fetch_data(f'/s/students/advisor/{advisor_id}')
 
+def get_sent_job_listings_for_students(student_id):
+    """Fetch all job listings sent to a specific student."""
+    return fetch_data(f"/j/job_listings/received/{student_id}")
+
+
 #----------------- Recruiter Analytics -----------------#
 
 def get_recruiter_analytics(recruiter_id):
