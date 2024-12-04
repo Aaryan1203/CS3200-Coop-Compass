@@ -414,7 +414,11 @@ VALUES ('100', 'job_1'),
 INSERT INTO `sentJobListings` (`jobListingId`, `studentId`, `advisorId`)
 VALUES ('job_1', '100', '1'),
         ('job_2', '100', '1'),
-        ('job_3', '100', '1');
+        ('job_3', '100', '1'),
+        ('job_3', '101', '1'),
+        ('job_4', '101', '1'),
+        ('job_3', '111', '1'),
+        ('job_3', '121', '1');
 
 INSERT INTO `flaggedReview` (`reviewId`, `flaggedById`, `reason`, `dateFlagged`)
 VALUES ('review_4', '0', 'Inappropriate language', '2024-11-25T05:23:24.599768'),
