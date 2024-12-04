@@ -14,7 +14,7 @@ from utils.style_utils import load_css
 
 # Set Streamlit page configuration for a modern look
 st.set_page_config(
-    page_title="Coop Compass",
+    page_title="Co-Op Compass",
     page_icon="🎓",
     layout="wide"
 )
@@ -36,7 +36,7 @@ load_css("./styles/home_page_styles.css")
 st.markdown(
     """
     <div class="hero">
-        <h1>Welcome to Co-op Compass 🎓</h1>
+        <h1>Welcome to Co-Op Compass 🎓</h1>
         <p>Your one-stop platform for navigating co-op opportunities!</p>
     </div>
     """,
@@ -55,7 +55,7 @@ with cols[0]:
         """
         <div class="card">
             <h3>Aaryan</h3>
-            <p>Student on a co-op search with one previous co-op</p>
+            <p>Student on a Co-Op search with one previous co-op</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -97,7 +97,7 @@ with cols[0]:
         """
         <div class="card">
             <h3>Rachel</h3>
-            <p>Co-op Advisor</p>
+            <p>Co-Op Advisor</p>
         </div>
         """,
         unsafe_allow_html=True

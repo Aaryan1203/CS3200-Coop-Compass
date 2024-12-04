@@ -13,10 +13,10 @@ SideBarLinks()
 # Apply custom CSS
 load_css("./styles/about_page_styles.css")
 
-st.title("About Co-op Compass")
+st.title("About Co-Op Compass")
 st.markdown (
     """
-The "Co-op Compass" platform is a unique, data-driven platform for Northeastern students
+The "Co-Op Compass" platform is a unique, data-driven platform for Northeastern students
 to gain valuable insights into co-op positions, going beyond what standard job postings offer.
 
  When applying for co-ops, students often lack transparency around work culture, compensation, and the true nature of job responsibilities.
