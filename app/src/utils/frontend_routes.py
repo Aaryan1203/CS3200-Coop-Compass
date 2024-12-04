@@ -123,7 +123,7 @@ def edit_review(data):
     return edit_data('/r/review', data)
 
 def flag_review(data):
-    return create_data('/r/review/flag', data)
+    return create_data('/m/review/flag', data)
 
 def toggle_delete_review(review_id):
     return delete_data(f'/r/review/{review_id}')
