@@ -58,9 +58,9 @@ with cols_top[0]:
         unsafe_allow_html=True
     )
     if st.button("View All Job Postings", use_container_width=True):
+        st.session_state['show_deleted'] = False
         st.session_state['company_id'] = False
         st.session_state['my_job_postings'] = False
-        st.session_state['show_deleted'] = False
         st.session_state['show_sent_jobs'] = False
         st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")

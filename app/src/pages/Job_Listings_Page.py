@@ -33,6 +33,8 @@ deleted = st.session_state.get("show_deleted", None)
 show_sent_jobs = st.session_state.get("show_sent_jobs", None)
 show_recieved_jobs = st.session_state.get("show_recieved_jobs", None)
 
+logger.info(f"deleted: {deleted}")
+
 if my_job_postings:
     try:
         job_listings = get_job_listings_by_recruiter(recruiter_id)

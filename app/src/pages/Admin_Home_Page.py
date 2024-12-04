@@ -80,6 +80,7 @@ with row1_cols[1]:
         unsafe_allow_html=True
     )
     if st.button("View all Job Postings", use_container_width=True):
+        st.session_state["show_deleted"] = False
         st.switch_page("pages/Job_Listings_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +

@@ -52,16 +52,16 @@ SideBarLinks()
 
 # Center and style the header
 if job_listing_id:
-    st.markdown(f'<h2 class="main-header">Reviews for {job_title}</h2>', unsafe_allow_html=True)
+    st.write("# Reviews for " + job_title)
 elif show_deleted:
-    st.markdown('<h2 class="main-header">Deleted Reviews</h2>', unsafe_allow_html=True)
+    st.write("# Deleted Reviews")
 elif show_flagged:
-    st.markdown('<h2 class="main-header">Flagged Reviews</h2>', unsafe_allow_html=True)
+    st.write("# Flagged Reviews")
     reviews = flagged_reviews
 elif show_my_flagged:
-    st.markdown('<h2 class="main-header">My Flagged Reviews</h2>', unsafe_allow_html=True)
+    st.write("# My Flagged Reviews")
 else:
-    st.markdown('<h2 class="main-header">My Reviews</h2>', unsafe_allow_html=True)
+    st.write("# My Reviews")
 
 if student_id and job_listing_id:
     if st.button("Write a review"):
