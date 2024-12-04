@@ -83,6 +83,7 @@ with row1_cols[1]:
         st.session_state["show_deleted"] = False
         st.session_state['my_job_postings'] = False
         st.session_state['show_sent_jobs'] = False
+        st.session_state['show_recieved_jobs'] = False
         st.switch_page("pages/Job_Listings_Page.py")
     st.markdown(
         "<div class='preview'><h4>Preview:</h4><ul>" +
