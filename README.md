@@ -39,7 +39,7 @@ Use Docker Compose to manage the containers:
 
 ### Blueprints
 
-- **Companies, Job Listings, Reviews, and Students:** Each blueprint manages a distinct part of the application with specific routes for backend data retrieval and manipulation.
+- **Companies, Job Listings, Reviews, and Management:** Each blueprint manages a distinct part of the application with specific routes for backend data retrieval and manipulation.
 
 ### Frontend Components
 
