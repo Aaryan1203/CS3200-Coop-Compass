@@ -2,6 +2,9 @@
 
 Welcome to the **Coop Compass** project! This platform is designed to streamline the co-op experience for students at Northeastern University. By enabling students to access personalized reviews and recruiters to post job opportunities, the platform bridges the gap between information and opportunity. Students can share their co-op experiences anonymously or openly, empowering others to make informed decisions.
 
+## Link to Presentation
+https://youtu.be/gugf1gvZp2I
+
 ## Key Features
 
 - **Student Reviews:** Personalized, detailed reviews of co-op experiences, with an option for anonymity.
